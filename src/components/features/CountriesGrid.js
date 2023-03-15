@@ -76,12 +76,12 @@ function CountriesGrid() {
     if (myRef.current === null) {
       console.log("null");
     } else if (!myRef.current.contains(e.target)) {
-      setNameFilter(undefined);
+      setNameFilter(undefined); //clear "detail page" state
     } 
   };
   const handleEscapeClose = (e) => {
-    if ( e.key === "Escape") {
-      setNameFilter(undefined)
+    if ( e.key === "Escape") { 
+      setNameFilter(undefined)  //clear "detail page" state
     }
   }
 

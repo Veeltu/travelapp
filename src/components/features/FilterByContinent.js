@@ -14,7 +14,7 @@ function FilterByContinent({  setFilterByContinent,filterByContinent }) {
     <div>
       <select
         onChange={(e) =>  setFilterByContinent(e.target.value)}
-        className="block w-full max-w-sm py-2 pr-3 border-none rounded-md shadow-xl bg-White border-slate-300 pl-9 sm:text-sm"
+        className="w-full max-w-xs select"
         value={filterByContinent}
       >
         {continents.map((e) => (
@@ -28,3 +28,5 @@ function FilterByContinent({  setFilterByContinent,filterByContinent }) {
 }
 
 export default FilterByContinent;
+
+// className="block w-full max-w-sm py-2 pr-3 border-none rounded-md shadow-xl bg-White border-slate-300 pl-9 sm:text-sm"

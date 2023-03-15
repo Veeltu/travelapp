@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  plugins: [require("daisyui")],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       backgroundImage: {
-        'hero': "url('./components/images/PlaneTravel.jpg')",
+        // 'hero': "url('./components/images/PlaneTravel.jpg')",
       }
     },
     colors: {
@@ -16,7 +17,7 @@ module.exports = {
       White: "hsl(0, 0%, 100%)" /*(Dark Mode Text & Light Mode Elements)*/,
     },
   },
-  plugins: [],
+  // plugins: [],
 
   darkMode: "class",
 };
