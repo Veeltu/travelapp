@@ -78,13 +78,13 @@ function CountriesGrid() {
       // console.log("null");b
     } else if (!myRef.current.contains(e.target)) {
       setNameFilter(undefined); //clear "detail page" state
-    } 
+    }
   };
   const handleEscapeClose = (e) => {
-    if ( e.key === "Escape") { 
-      setNameFilter(undefined)  //clear "detail page" state
+    if (e.key === "Escape") {
+      setNameFilter(undefined); //clear "detail page" state
     }
-  }
+  };
 
   useEffect(() => {
     document.addEventListener("keydown", handleEscapeClose);
@@ -96,8 +96,54 @@ function CountriesGrid() {
   return (
     <>
       <div className="flex flex-col justify-center align-middle ">
-        {detailPageView ? (
-          <></>
+        {/* {detailPageView ? (
+          <>
+          
+          
+          </>
+        ) : (
+          <>
+            <div
+              className="flex justify-center align-middle"
+              ref={myRef}
+              onClick={handleClickOutside}
+            >
+              <CountriesDetails
+                data={dataForDetailPage}
+                jsonData={jsonData}
+                button={resetDetailState}
+                setNameFilter={changeCountry}
+              />
+            </div>
+          </>
+        )} */}
+
+        
+        <div className="flex flex-col items-center justify-between w-full px-4 py-6 mx-auto h-9 sm:flex-row max-w-7xl">
+          <FilterByName
+            setInputTextToFilter={setInputTextToFilter}
+            inputTextToFilter={inputTextToFilter}
+          />
+          <FilterByContinent
+            setFilterByContinent={setFilterByContinent}
+            filterByContinent={filterByContinent}
+          />
+        </div>
+
+        <div className="flex flex-row justify-between w-full px-12 py-10 mx-auto max-w-7xl">
+          <>
+
+          {detailPageView ? (
+          <>
+             <div className="cursor-pointer ">
+              <CountriesTable
+                data={finalFilerToCardsGrid}
+                setNameFilter={setNameFilter}
+              />
+            </div>
+          
+          
+          </>
         ) : (
           <>
             <div
@@ -114,27 +160,13 @@ function CountriesGrid() {
             </div>
           </>
         )}
-        <div className="flex flex-col items-center justify-between w-full px-4 py-6 mx-auto h-9 sm:flex-row max-w-7xl">
-          <FilterByName
-            setInputTextToFilter={setInputTextToFilter}
-            inputTextToFilter={inputTextToFilter}
-          />
-          <FilterByContinent
-            setFilterByContinent={setFilterByContinent}
-            filterByContinent={filterByContinent}
-          />
-        </div>
-        <div className="flex flex-row justify-between w-full px-12 py-10 mx-auto max-w-7xl">
-          <>
-            <div className="cursor-pointer ">
+            {/* <div className="cursor-pointer ">
               <CountriesTable
                 data={finalFilerToCardsGrid}
                 setNameFilter={setNameFilter}
               />
-            </div>
-              <div className="">
-                <MapChart/>
-              </div>
+            </div> */}
+            <MapChart />
           </>
         </div>
       </div>

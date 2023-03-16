@@ -5,7 +5,11 @@ const geoUrl =
 
 export default function MapChart() {
   return (
-    <ComposableMap className="artboard artboard-horizontal phone-2 bg-White/5 drop-shadow-xl">
+    <ComposableMap className="artboard artboard-horizontal phone-2 bg-White/5 drop-shadow-xl"
+    projection="geoAzimuthalEqualArea"
+    projectionConfig={{
+      scale: 400
+    }}>
         
       <Geographies geography={geoUrl}>
         {({ geographies }) =>

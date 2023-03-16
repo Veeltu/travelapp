@@ -1,7 +1,6 @@
 import InputPlacesApi from "./newfeature/input";
 
 function CountriesDetails({ data, jsonData, button, setNameFilter }) {
-
   const borderCountries = (e) => {
     const findCountry = jsonData.filter((item) => e.includes(item.cca3));
     const countryNames = findCountry.map((e) => e.name.common);
@@ -9,27 +8,23 @@ function CountriesDetails({ data, jsonData, button, setNameFilter }) {
   };
 
   return (
-    <div
-      className="w-[80%] fixed  z-10 flex  justify-center h-auto rounded-2xl align-middle  dark:bg-DarkBlue/40 border border-White bg-White/60
-    backdrop-filter backdrop-blur-xl p-[.3em] px-[1.2em]
-    "
-    >
-      <main className="max-w-md mx-auto capitalize lg:max-w-6xl py-14">
-        <button
-          className="bg-White dark:text-White rounded-2xl dark:bg-DarkBlue p-[.3em] px-[1.2em]  mb-9 flex gap-2 
-        items-center text-sm drop-shadow-md "
-          onClick={button}
-        >
+    <div className="">
+      <main className="">
+        <button className="btn " onClick={button}>
           GET BACK
         </button>
-        <div className="justify-center mx-auto rounded-2xl dark:text-White drop-shadow-lg ">
+        <div className="">
           {data.map((e) => (
             <div
               key={e.name.common}
               data-id={e.name.common}
-              className="grid justify-center mx-auto lg:gap-5 lg:grid-cols-2 lg:justify-between lg:text-left"
+              className="flex flex-col justify-center mx-auto lg:gap-5 lg:grid-cols-2 lg:justify-between lg:text-left"
             >
-              <img className="mb-5" alt="flag" src={e.flags.png}></img>
+              <div className="avatar">
+                <div className="w-24 rounded">
+                  <img className="mb-5" alt="flag" src={e.flags.png}></img>
+                </div>
+              </div>
               <div className=" grid lg:grid-cols-2 grid-rows-[2.6em] gap-x-5">
                 <div className="flex items-center gap-2 mb-4 text-lg font-bold sm:text-2xl lg:mb-5 sm:col-span-2 sm:gap-3">
                   <h2>{e.name.common}</h2>
@@ -83,7 +78,7 @@ function CountriesDetails({ data, jsonData, button, setNameFilter }) {
                       ? e.borders.map((e) => (
                           <ul
                             key={e}
-                            className="cursor-pointer bg-White dark:bg-DarkBlue p-[.3em] px-[1.3em] rounded-sm drop-shadow-lg w-32 "
+                            className="btn"
                             onClick={(e) => setNameFilter(e)}
                           >
                             {borderCountries(e)}
