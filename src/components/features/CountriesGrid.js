@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import CountriesCards from "./CountreisCards";
+import CountriesTable from "./CountreisTable";
 import FilterByName from "./FilterByName";
 import FilterByContinent from "./FilterByContinent";
 import CountriesDetails from "./CountriesDetails";
 import InfiniteScroll from "react-infinite-scroll-component";
+import MapChart from "./Map";
 
 const url = "https://restcountries.com/v3.1/";
 
@@ -74,7 +75,7 @@ function CountriesGrid() {
 
   const handleClickOutside = (e) => {
     if (myRef.current === null) {
-      console.log("null");
+      // console.log("null");b
     } else if (!myRef.current.contains(e.target)) {
       setNameFilter(undefined); //clear "detail page" state
     } 
@@ -123,14 +124,17 @@ function CountriesGrid() {
             filterByContinent={filterByContinent}
           />
         </div>
-        <div className="flex items-center justify-between w-full px-12 py-10 mx-auto max-w-7xl">
+        <div className="flex flex-row justify-between w-full px-12 py-10 mx-auto max-w-7xl">
           <>
             <div className="cursor-pointer ">
-              <CountriesCards
+              <CountriesTable
                 data={finalFilerToCardsGrid}
                 setNameFilter={setNameFilter}
               />
             </div>
+              <div className="">
+                <MapChart/>
+              </div>
           </>
         </div>
       </div>
