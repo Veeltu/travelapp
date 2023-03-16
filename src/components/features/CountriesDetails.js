@@ -8,7 +8,7 @@ function CountriesDetails({ data, jsonData, button, setNameFilter }) {
   };
 
   return (
-    <div className="">
+    <div className="card w-96 bg-primary text-primary-content">
       <main className="">
         <button className="btn " onClick={button}>
           GET BACK

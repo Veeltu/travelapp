@@ -89,36 +89,12 @@ function CountriesGrid() {
   useEffect(() => {
     document.addEventListener("keydown", handleEscapeClose);
     document.addEventListener("mousedown", handleClickOutside);
-    console.log("effect");
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
     <>
       <div className="flex flex-col justify-center align-middle ">
-        {/* {detailPageView ? (
-          <>
-          
-          
-          </>
-        ) : (
-          <>
-            <div
-              className="flex justify-center align-middle"
-              ref={myRef}
-              onClick={handleClickOutside}
-            >
-              <CountriesDetails
-                data={dataForDetailPage}
-                jsonData={jsonData}
-                button={resetDetailState}
-                setNameFilter={changeCountry}
-              />
-            </div>
-          </>
-        )} */}
-
-        
         <div className="flex flex-col items-center justify-between w-full px-4 py-6 mx-auto h-9 sm:flex-row max-w-7xl">
           <FilterByName
             setInputTextToFilter={setInputTextToFilter}
@@ -131,43 +107,33 @@ function CountriesGrid() {
         </div>
 
         <div className="flex flex-row justify-between w-full px-12 py-10 mx-auto max-w-7xl">
-          <>
+            {detailPageView ? (
+              <>
+                <div className="cursor-pointer ">
+                  <CountriesTable
+                    data={finalFilerToCardsGrid}
+                    setNameFilter={setNameFilter}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className="flex justify-center align-middle"
+                  ref={myRef}
+                  onClick={handleClickOutside}
+                >
+                  <CountriesDetails
+                    data={dataForDetailPage}
+                    jsonData={jsonData}
+                    button={resetDetailState}
+                    setNameFilter={changeCountry}
+                  />
+                </div>
+              </>
+            )}
 
-          {detailPageView ? (
-          <>
-             <div className="cursor-pointer ">
-              <CountriesTable
-                data={finalFilerToCardsGrid}
-                setNameFilter={setNameFilter}
-              />
-            </div>
-          
-          
-          </>
-        ) : (
-          <>
-            <div
-              className="flex justify-center align-middle"
-              ref={myRef}
-              onClick={handleClickOutside}
-            >
-              <CountriesDetails
-                data={dataForDetailPage}
-                jsonData={jsonData}
-                button={resetDetailState}
-                setNameFilter={changeCountry}
-              />
-            </div>
-          </>
-        )}
-            {/* <div className="cursor-pointer ">
-              <CountriesTable
-                data={finalFilerToCardsGrid}
-                setNameFilter={setNameFilter}
-              />
-            </div> */}
             <MapChart />
-          </>
         </div>
       </div>
     </>
