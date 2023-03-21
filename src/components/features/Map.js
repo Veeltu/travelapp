@@ -44,11 +44,11 @@ useEffect(() => {
           {({ geographies }) =>
             geographies.map((geo) => (
               <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                className={
-                  " drop-shadow-xl  hover:fill-accent active:fill-warning focus:fill-warning   fill-slate-100  outline-none"
-                }
+              key={geo.rsmKey}
+              geography={geo}
+              className={
+                " drop-shadow-xl  hover:fill-accent active:fill-warning focus:fill-warning   fill-slate-100  outline-none"
+              }
               />
             ))
           }
