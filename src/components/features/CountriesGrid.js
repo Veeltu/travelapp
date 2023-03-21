@@ -15,11 +15,14 @@ function CountriesGrid() {
   const [inputTextToFilter, setInputTextToFilter] = useState("");
   const [finalFilerToCardsGrid, setFilterToCardsGrid] = useState([]);
 
+
   // This value stores data from filter name for detail page
   const [nameFilter, setNameFilter] = useState();
 
   const [dataForDetailPage, setDataForDetailPage] = useState([]);
   const [detailPageView, setDetailPageView] = useState(false);
+
+// console.log(`dataForDetailPage ${dataForDetailPage}`)
 
   //fetch data
   useEffect(() => {
@@ -133,7 +136,7 @@ function CountriesGrid() {
               </>
             )}
 
-            <MapChart />
+            <MapChart dataForDetailPage={dataForDetailPage}/>
         </div>
       </div>
     </>

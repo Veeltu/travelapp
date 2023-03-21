@@ -11,10 +11,26 @@ import { useEffect, useState } from "react";
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
 
-export default function MapChart() {
+export default function MapChart({dataForDetailPage}) {
+
+// console.log(dataForDetailPage)
+
 const [targetCoordinates, setTargetCoordinates] = useState([]);
 
-// setTargetCoordinates([0,0])
+// console.log(` target coordinates = ${targetCoordinates}`)
+
+useEffect(() => {
+  if (dataForDetailPage.length === 0) {
+    const coor = [20,51]
+  setTargetCoordinates(coor)
+}
+  else {
+    const coor = dataForDetailPage.map((e) => e.latlng)
+    const coorRevers = coor[0].slice().reverse();
+    setTargetCoordinates(coorRevers)
+  }
+
+},[dataForDetailPage])
   return (
     <ComposableMap
       className="w-1/2 shadow-xl h-1/2 card bg-white/5 drop-shadow-xl"
@@ -23,7 +39,7 @@ const [targetCoordinates, setTargetCoordinates] = useState([]);
         scale: 200,
       }}
     >
-      <ZoomableGroup center={targetCoordinates} zoom={9} >
+      <ZoomableGroup center={targetCoordinates} zoom={3} >
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => (
@@ -33,14 +49,12 @@ const [targetCoordinates, setTargetCoordinates] = useState([]);
                 className={
                   " drop-shadow-xl  hover:fill-accent active:fill-warning focus:fill-warning   fill-slate-100  outline-none"
                 }
-                // fill="#FF5533"
-                // stroke="#4169E1"
               />
             ))
           }
         </Geographies>
         <Marker coordinates={targetCoordinates}>
-            <circle r={1} fill="#FF5533" />
+            <circle r={10} fill="#FF5533" />
           </Marker>
       </ZoomableGroup>
       {/* <Annotation
