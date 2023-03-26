@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import InputPlacesApi from "./newfeature/input";
 
 function CountriesDetails({ data, jsonData, button, setNameFilter }) {
@@ -91,6 +92,11 @@ function CountriesDetails({ data, jsonData, button, setNameFilter }) {
             </div>
           ))}
         </div>
+        <Link to="/images">
+            <button className='btn'>
+                images
+            </button>
+        </Link>
       </main>
     </div>
   );

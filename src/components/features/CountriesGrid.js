@@ -136,7 +136,9 @@ function CountriesGrid() {
               </>
             )}
 
-            <MapChart dataForDetailPage={dataForDetailPage}/>
+            <MapChart
+            dataForDetailPage={dataForDetailPage}
+            />
         </div>
       </div>
     </>
