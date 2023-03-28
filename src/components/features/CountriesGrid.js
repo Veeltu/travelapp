@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import CountriesTable from "./CountreisTable";
-import FilterByName from "./FilterByName";
-import FilterByContinent from "./FilterByContinent";
+import FilterByName from "./filters/FilterByName";
+import FilterByContinent from "./filters/FilterByContinent";
 import CountriesDetails from "./CountriesDetails";
-import InfiniteScroll from "react-infinite-scroll-component";
+// import InfiniteScroll from "react-infinite-scroll-component";
 import MapChart from "./Map";
 
 const url = "https://restcountries.com/v3.1/";
@@ -15,14 +15,13 @@ function CountriesGrid() {
   const [inputTextToFilter, setInputTextToFilter] = useState("");
   const [finalFilerToCardsGrid, setFilterToCardsGrid] = useState([]);
 
-
   // This value stores data from filter name for detail page
   const [nameFilter, setNameFilter] = useState();
 
   const [dataForDetailPage, setDataForDetailPage] = useState([]);
   const [detailPageView, setDetailPageView] = useState(false);
 
-// console.log(`dataForDetailPage ${dataForDetailPage}`)
+  // console.log(`dataForDetailPage ${dataForDetailPage}`)
 
   //fetch data
   useEffect(() => {
@@ -78,7 +77,7 @@ function CountriesGrid() {
 
   const handleClickOutside = (e) => {
     if (myRef.current === null) {
-      // console.log("null");b
+      // console.log("null")
     } else if (!myRef.current.contains(e.target)) {
       setNameFilter(undefined); //clear "detail page" state
     }
@@ -110,35 +109,34 @@ function CountriesGrid() {
         </div>
 
         <div className="flex flex-row justify-between w-full px-12 py-10 mx-auto max-w-7xl">
-            {detailPageView ? (
-              <>
-                <div className="cursor-pointer ">
-                  <CountriesTable
-                    data={finalFilerToCardsGrid}
-                    setNameFilter={setNameFilter}
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <div
-                  className="flex justify-center align-middle"
-                  ref={myRef}
-                  onClick={handleClickOutside}
-                >
-                  <CountriesDetails
-                    data={dataForDetailPage}
-                    jsonData={jsonData}
-                    button={resetDetailState}
-                    setNameFilter={changeCountry}
-                  />
-                </div>
-              </>
-            )}
+          {detailPageView ? (
+            <>
+              <div className="cursor-pointer ">
+                <CountriesTable
+                  data={finalFilerToCardsGrid}
+                  setNameFilter={setNameFilter}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className="flex justify-center align-middle"
+                ref={myRef}
+                onClick={handleClickOutside}
+              >
+                <CountriesDetails
+                  data={dataForDetailPage}
+                  jsonData={jsonData}
+                  button={resetDetailState}
+                  setNameFilter={changeCountry}
+                  nameFilter={nameFilter}
+                />
+              </div>
+            </>
+          )}
 
-            <MapChart
-            dataForDetailPage={dataForDetailPage}
-            />
+          <MapChart dataForDetailPage={dataForDetailPage} />
         </div>
       </div>
     </>

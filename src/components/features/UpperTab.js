@@ -1,4 +1,3 @@
-import DarkMode from "./DarkMode";
 import { useEffect } from "react";
 import { themeChange } from "theme-change";
 
@@ -14,7 +13,6 @@ function UpperTab() {
         <h1 className="text-xl font-bold md:text-xl dark:text-White ">
           Where in the World?
         </h1>
-        {/* <DarkMode /> */}
         <div>
           change theme
           <select data-choose-theme className="w-full max-w-xs select">

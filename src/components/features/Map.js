@@ -26,7 +26,7 @@ const [cca3Name, setCca3Name] =useState("")
 
 useEffect(() => {
   if (dataForDetailPage.length === 0) {
-  setTargetCoordinates('')
+  setTargetCoordinates([])
 }
   else {
     const coor = dataForDetailPage.map((e) => e.latlng)

@@ -3,6 +3,7 @@ import Images from "./components/features/Images";
 import { Route, Routes } from "react-router-dom";
 
 
+
 function App() {
   return (
     <>
@@ -15,5 +16,3 @@ function App() {
 }
 
 export default App;
-
-// dark:bg-BackgroundDarkBlue bg-White

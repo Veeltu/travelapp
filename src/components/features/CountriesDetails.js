@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
-import InputPlacesApi from "./newfeature/input";
 
-function CountriesDetails({ data, jsonData, button, setNameFilter }) {
+function CountriesDetails({
+  data,
+  jsonData,
+  button,
+  setNameFilter,
+  nameFilter,
+}) {
   const borderCountries = (e) => {
     const findCountry = jsonData.filter((item) => e.includes(item.cca3));
     const countryNames = findCountry.map((e) => e.name.common);
@@ -92,10 +97,8 @@ function CountriesDetails({ data, jsonData, button, setNameFilter }) {
             </div>
           ))}
         </div>
-        <Link to="/images">
-            <button className='btn'>
-                images
-            </button>
+        <Link to="/images" state={nameFilter}>
+          <button className="btn">images</button>
         </Link>
       </main>
     </div>

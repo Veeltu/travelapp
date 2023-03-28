@@ -4,8 +4,8 @@ import UpperTab from "../features/UpperTab";
 function MainView() {
   return (
     <div>
-      <UpperTab /> 
-      <CountriesGrid/> 
+        <UpperTab />
+        <CountriesGrid />
     </div>
   );
 }
