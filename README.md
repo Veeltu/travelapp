@@ -9,13 +9,14 @@ work in progres
 7. themes changer
 8. add svg map
 9. sync svg map with table
-10. 
+10. add tooltip
+11. change targetCountry on click on map ?
+
+?change country without toogle on lick on map
 
 TODO 
-map - target whole country not ball
 map - target capital city too
 shorter table
-unsplash pictures from country
 money
 
 idea 
@@ -27,7 +28,3 @@ geo.properties:
 { name: 'Norway', 'Alpha-2': 'NO' }
 geo.properties:
 { name: 'Russia', 'Alpha-2': 'RU' }
-
-small steps :
-pass props react router :
-    - how to send props to app.js in best way ?

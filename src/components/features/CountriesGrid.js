@@ -7,6 +7,9 @@ import CountriesDetails from "./CountriesDetails";
 // import InfiniteScroll from "react-infinite-scroll-component";
 import MapChart from "./Map";
 
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
+
 const url = "https://restcountries.com/v3.1/";
 
 function CountriesGrid() {
@@ -20,8 +23,11 @@ function CountriesGrid() {
 
   const [dataForDetailPage, setDataForDetailPage] = useState([]);
   const [detailPageView, setDetailPageView] = useState(false);
+// state for tooltip
+  const [targetCountries, setTargetCountries] = useState("");
+  // console.log(targetCountries)
 
-  // console.log(`dataForDetailPage ${dataForDetailPage}`)
+  console.log(`dataForDetailPage ${dataForDetailPage}`)
 
   //fetch data
   useEffect(() => {
@@ -136,7 +142,14 @@ function CountriesGrid() {
             </>
           )}
 
-          <MapChart dataForDetailPage={dataForDetailPage} />
+          <MapChart
+            setTargetCountries={setTargetCountries}
+            dataForDetailPage={dataForDetailPage}
+            setNameFilter={setNameFilter}
+          />
+
+          <Tooltip id="tooltip"
+          >{targetCountries}</Tooltip>
         </div>
       </div>
     </>
