@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 function CountriesDetails({
   data,
   jsonData,
-  button,
-  setNameFilter,
+  backButton,
+  changeCountry,
   nameFilter,
 }) {
   const borderCountries = (e) => {
@@ -16,7 +16,7 @@ function CountriesDetails({
   return (
     <div className="card w-96 bg-primary text-primary-content">
       <main className="">
-        <button className="btn " onClick={button}>
+        <button className="btn " onClick={backButton}>
           GET BACK
         </button>
         <div className="">
@@ -38,7 +38,7 @@ function CountriesDetails({
                 {/*column1 */}
                 <div className="mb-5 column1 lg:mb-0">
                   <div className="nativname">
-                    b<span className="font-semibold">Native Name: </span>
+                    <span className="font-semibold">Native Name: </span>
                     {
                       e.name.nativeName[Object.keys(e.name.nativeName)[0]]
                         .common
@@ -85,7 +85,7 @@ function CountriesDetails({
                           <ul
                             key={e}
                             className="btn"
-                            onClick={(e) => setNameFilter(e)}
+                            onClick={(e) => changeCountry(e)}
                           >
                             {borderCountries(e)}
                           </ul>

@@ -12,16 +12,20 @@ import { Tooltip } from "react-tooltip";
 
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+console.log(geoUrl);
 
-function MapChart({ dataForDetailPage, setTargetCountries, setNameFilter }) {
+function MapChart({
+  dataForDetailPage,
+  setTargetCountries,
+  handleClickOnMap,
+  // hoverCoordinates,
+}) {
+  // state for zoom to target(detailPage) country
   const [targetCoordinates, setTargetCoordinates] = useState([]);
-  // const [targetCountries, setTargetCountries] = useState("")
+  // why I need cca3 ?
   const [cca3Name, setCca3Name] = useState("");
 
-  // console.log(targetCountries)
-  // console.log(cca3Name)
-  // consol  e.log(targetCountries)
-
+  // getting coordinates (have to revers them to mach mapApi with countriesApi data)
   useEffect(() => {
     if (dataForDetailPage.length === 0) {
       setTargetCoordinates([]);
@@ -34,10 +38,12 @@ function MapChart({ dataForDetailPage, setTargetCountries, setNameFilter }) {
     }
   }, [dataForDetailPage]);
 
+  const nameOnMap = dataForDetailPage.map((e) => e.name.common);
+
   return (
     <>
       <ComposableMap
-        className="w-full h-full shadow-xl card bg-white/5 drop-shadow-xl"
+        className="w-full h-full shadow-xl cursor-pointer card bg-white/5 drop-shadow-xl "
         data-tooltip-id="tooltip"
         data-tooltip-float="true"
         projection="geoEqualEarth"
@@ -45,7 +51,8 @@ function MapChart({ dataForDetailPage, setTargetCountries, setNameFilter }) {
           scale: 200,
         }}
       >
-        <ZoomableGroup center={targetCoordinates} zoom={3}>
+        // hoverCoordinates ?
+        <ZoomableGroup center={targetCoordinates} zoom={4}>
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => (
@@ -56,23 +63,22 @@ function MapChart({ dataForDetailPage, setTargetCountries, setNameFilter }) {
                     "hover:fill-accent active:fill-warning focus:fill-warning   fill-slate-100  outline-none"
                   }
                   onMouseEnter={() => {
-                    // console.log(geo.properties)
                     const name = geo.properties.name;
                     setTargetCountries(name);
                   }}
                   onMouseLeave={() => setTargetCountries("")}
                   onClick={() => {
                     const name = geo.properties.name;
-                    setNameFilter(name)
+                    handleClickOnMap(name);
                   }}
                 />
               ))
             }
           </Geographies>
-
           <Marker coordinates={targetCoordinates}>
-            {/* <circle r={4} fill="#FF5533" /> */}
-            {/* <text textAnchor="middle" fill="#777">{cca3Name}</text> */}
+            <text textAnchor="middle" className="font-bold fill-accent ">
+              {nameOnMap}
+            </text>
           </Marker>
         </ZoomableGroup>
       </ComposableMap>

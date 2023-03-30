@@ -14,20 +14,21 @@ const url = "https://restcountries.com/v3.1/";
 
 function CountriesGrid() {
   const [jsonData, setJsonData] = useState([]);
+  // filters by name and continent
   const [filterByContinent, setFilterByContinent] = useState("All");
   const [inputTextToFilter, setInputTextToFilter] = useState("");
   const [finalFilerToCardsGrid, setFilterToCardsGrid] = useState([]);
-
-  // This value stores data from filter name for detail page
+  // name of coutry use to filter from big data
   const [nameFilter, setNameFilter] = useState();
-
+  // array for detailPage
   const [dataForDetailPage, setDataForDetailPage] = useState([]);
+  // show/ hide detailPage
   const [detailPageView, setDetailPageView] = useState(false);
-// state for tooltip
+  // state for tooltip
   const [targetCountries, setTargetCountries] = useState("");
-  // console.log(targetCountries)
-
-  console.log(`dataForDetailPage ${dataForDetailPage}`)
+  // coordinates for hover on table
+  // const [hoverCoordinates, setHoverCoordiantes] = useState("");
+  // console.log(hoverCoordinates);
 
   //fetch data
   useEffect(() => {
@@ -45,20 +46,27 @@ function CountriesGrid() {
 
   //filter for one country match with "nameFilter"
   useEffect(() => {
-    let detailData = [];
-    if (nameFilter !== [])
-      // ???
-      detailData = jsonData.filter((e) => e.name.common === nameFilter);
+    const detailData = jsonData.filter((e) => e.name.common === nameFilter);
     setDataForDetailPage(detailData);
     toggle();
+    console.log("namefilter change");
   }, [nameFilter]);
 
-  const changeCountry = (e) => {
-    const a = e.currentTarget.textContent;
-    const detailData = jsonData.filter((e) => e.name.common === a);
-    setDataForDetailPage(detailData);
+  //function => click on map show detail page of target country
+  const handleClickOnMap = (target) => {
+    const detailData = jsonData.filter((e) => e.name.common === target);
+    if (nameFilter != undefined) {
+      setDataForDetailPage(detailData);
+    } else {
+      setNameFilter(target);
+    }
   };
 
+  const changeCountry = (e) => {
+    const target = e.currentTarget.textContent;
+    const detailData = jsonData.filter((e) => e.name.common === target);
+    setDataForDetailPage(detailData);
+  };
   //filterByContinent
   useEffect(() => {
     let result = jsonData;
@@ -66,7 +74,6 @@ function CountriesGrid() {
       result = result.filter((e) => e.region === filterByContinent);
     setFilterToCardsGrid(result);
   }, [filterByContinent]);
-
   //name filter
   useEffect(() => {
     const filteredData = jsonData.filter((e) => {
@@ -80,10 +87,8 @@ function CountriesGrid() {
 
   //close details => outside click and ESC
   const myRef = useRef();
-
   const handleClickOutside = (e) => {
     if (myRef.current === null) {
-      // console.log("null")
     } else if (!myRef.current.contains(e.target)) {
       setNameFilter(undefined); //clear "detail page" state
     }
@@ -117,10 +122,12 @@ function CountriesGrid() {
         <div className="flex flex-row justify-between w-full px-12 py-10 mx-auto max-w-7xl">
           {detailPageView ? (
             <>
-              <div className="cursor-pointer ">
+              <div className="cursor-pointer">
                 <CountriesTable
                   data={finalFilerToCardsGrid}
+                  // set data for detailPage and open detailPage
                   setNameFilter={setNameFilter}
+                  // setHoverCoordiantes={setHoverCoordiantes}
                 />
               </div>
             </>
@@ -133,9 +140,11 @@ function CountriesGrid() {
               >
                 <CountriesDetails
                   data={dataForDetailPage}
+                  //to filter border countries
                   jsonData={jsonData}
-                  button={resetDetailState}
-                  setNameFilter={changeCountry}
+                  backButton={resetDetailState}
+                  changeCountry={changeCountry}
+                  //for img page
                   nameFilter={nameFilter}
                 />
               </div>
@@ -145,11 +154,10 @@ function CountriesGrid() {
           <MapChart
             setTargetCountries={setTargetCountries}
             dataForDetailPage={dataForDetailPage}
-            setNameFilter={setNameFilter}
+            handleClickOnMap={handleClickOnMap}
+            // hoverCoordinates={hoverCoordinates}
           />
-
-          <Tooltip id="tooltip"
-          >{targetCountries}</Tooltip>
+          <Tooltip id="tooltip">{targetCountries}</Tooltip>
         </div>
       </div>
     </>
