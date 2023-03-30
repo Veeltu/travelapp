@@ -1,11 +1,11 @@
-const CountriesTable = ({ data, setNameFilter }) => {
+const CountriesTable = ({ data, setNameFilter, setHoverCoordiantes }) => {
   const handleDetailsClick = (e) => {
     const a = e.currentTarget.dataset.id;
     setNameFilter(a);
   };
   return (
     <>
-      <div className=" bg-VeryLightGray box-sizing: content-box" >
+      <div className=" bg-VeryLightGray box-sizing: content-box">
         <table className="table w-full h-40 text-xs">
           <thead>
             <tr>
@@ -20,7 +20,15 @@ const CountriesTable = ({ data, setNameFilter }) => {
           <tbody>
             {data.map((e) => (
               <tr
+                className="hover"
                 onClick={(e) => handleDetailsClick(e)}
+                //hoverCoordiantes
+                // onMouseEnter={() => {
+                //   const coor = e.latlng;
+                //   const coorRevers = coor.slice().reverse();
+                //   setHoverCoordiantes(coorRevers);
+                // }}
+                // onMouseLeave={() => setHoverCoordiantes("")}
                 key={e.name.common}
                 data-id={e.name.common}
               >
