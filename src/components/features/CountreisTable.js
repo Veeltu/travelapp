@@ -1,8 +1,9 @@
-const CountriesTable = ({ data, setNameFilter, setHoverCoordiantes }) => {
-  const handleDetailsClick = (e) => {
+const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
+  const hangleTableClick = (e) => {
     const a = e.currentTarget.dataset.id;
     setNameFilter(a);
   };
+
   return (
     <>
       <div className=" bg-VeryLightGray box-sizing: content-box">
@@ -21,14 +22,10 @@ const CountriesTable = ({ data, setNameFilter, setHoverCoordiantes }) => {
             {data.map((e) => (
               <tr
                 className="hover"
-                onClick={(e) => handleDetailsClick(e)}
-                //hoverCoordiantes
-                // onMouseEnter={() => {
-                //   const coor = e.latlng;
-                //   const coorRevers = coor.slice().reverse();
-                //   setHoverCoordiantes(coorRevers);
-                // }}
-                // onMouseLeave={() => setHoverCoordiantes("")}
+                onClick={(e) => hangleTableClick(e)}
+                hoverData
+                onMouseEnter={() => setHoverData(e)}
+                onMouseLeave={() => setHoverData("")}
                 key={e.name.common}
                 data-id={e.name.common}
               >

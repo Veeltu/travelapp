@@ -8,22 +8,60 @@ import {
 } from "react-simple-maps";
 import { useEffect, useState, memo } from "react";
 import "react-tooltip/dist/react-tooltip.css";
+import mapJson from "../mapJson.json";
 import { Tooltip } from "react-tooltip";
+import axios from "axios";
 
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
-console.log(geoUrl);
 
 function MapChart({
   dataForDetailPage,
   setTargetCountries,
   handleClickOnMap,
-  // hoverCoordinates,
+  hoverData,
 }) {
+  const [apiMapData, setApiMapData] = useState([]);
   // state for zoom to target(detailPage) country
   const [targetCoordinates, setTargetCoordinates] = useState([]);
   // why I need cca3 ?
   const [cca3Name, setCca3Name] = useState("");
+  //hover states
+  const [hoverTableName, setHoverTableName] = useState([]);
+  const [hoverCoordinates, setHoverCoordinates] = useState([]);
+
+  console.log(apiMapData);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const resp = await axios.get(geoUrl);
+        setApiMapData(resp.data.objects);
+      } catch (error) {
+        console.log(error.data);
+      }
+    };
+    getData();
+  }, []);
+
+  // hover stuff
+  useEffect(() => {
+    if (hoverData.length === 0) {
+      setHoverTableName([]);
+    } else {
+      // set name of hover country
+      const hoverName = hoverData.name.common;
+      setHoverTableName(hoverName);
+      // set coordiantes of hover country
+      const hoverCoordinates = hoverData.latlng;
+      const reversCoordinates = hoverCoordinates.slice().reverse();
+      setHoverCoordinates(reversCoordinates);
+    }
+  }, [hoverData]);
+
+  //add css to ? axios ?
+  // const changeColor = mapJson.find(
+  //   (e) => e..name === hoverTableName
+  // );
 
   // getting coordinates (have to revers them to mach mapApi with countriesApi data)
   useEffect(() => {
@@ -33,8 +71,8 @@ function MapChart({
       const coor = dataForDetailPage.map((e) => e.latlng);
       const coorRevers = coor[0].slice().reverse();
       setTargetCoordinates(coorRevers);
-      const cca3Data = dataForDetailPage.map((e) => e.cca3);
-      setCca3Name(cca3Data);
+      // const cca3Data = dataForDetailPage.map((e) => e.cca3);
+      // setCca3Name(cca3Data);
     }
   }, [dataForDetailPage]);
 
@@ -86,19 +124,3 @@ function MapChart({
   );
 }
 export default memo(MapChart);
-{
-  /* <Annotation
-  subject={[2.3522, 48.8566]}
-  dx={-90}
-  dy={-30}
-  connectorProps={{
-    stroke: "#FF5533",
-    strokeWidth: 1,
-    strokeLinecap: "round"
-  }}
->
-  <text x="-4" textAnchor="end" alignmentBaseline="middle" fill="#F53">
-    {"Paris"}
-  </text>
-</Annotation> */
-}

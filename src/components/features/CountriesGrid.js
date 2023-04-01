@@ -27,8 +27,8 @@ function CountriesGrid() {
   // state for tooltip
   const [targetCountries, setTargetCountries] = useState("");
   // coordinates for hover on table
-  // const [hoverCoordinates, setHoverCoordiantes] = useState("");
-  // console.log(hoverCoordinates);
+  const [hoverData, setHoverData] = useState([]);
+  // console.log(hoverData);
 
   //fetch data
   useEffect(() => {
@@ -44,12 +44,11 @@ function CountriesGrid() {
     getData();
   }, []);
 
-  //filter for one country match with "nameFilter"
+  //set data for detailPage and toggle detailPage
   useEffect(() => {
     const detailData = jsonData.filter((e) => e.name.common === nameFilter);
     setDataForDetailPage(detailData);
     toggle();
-    console.log("namefilter change");
   }, [nameFilter]);
 
   //function => click on map show detail page of target country
@@ -127,7 +126,7 @@ function CountriesGrid() {
                   data={finalFilerToCardsGrid}
                   // set data for detailPage and open detailPage
                   setNameFilter={setNameFilter}
-                  // setHoverCoordiantes={setHoverCoordiantes}
+                  setHoverData={setHoverData}
                 />
               </div>
             </>
@@ -155,7 +154,7 @@ function CountriesGrid() {
             setTargetCountries={setTargetCountries}
             dataForDetailPage={dataForDetailPage}
             handleClickOnMap={handleClickOnMap}
-            // hoverCoordinates={hoverCoordinates}
+            hoverData={hoverData}
           />
           <Tooltip id="tooltip">{targetCountries}</Tooltip>
         </div>
