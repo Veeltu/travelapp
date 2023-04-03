@@ -67,6 +67,7 @@ function CountriesGrid() {
     const target = e.currentTarget.textContent;
     const detailData = jsonData.filter((e) => e.name.common === target);
     setDataForDetailPage(detailData);
+    setHoverBorderData('')
   };
   //filterByContinent
   useEffect(() => {
@@ -106,6 +107,7 @@ function CountriesGrid() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+ 
   return (
     <>
       <div className="flex flex-col justify-center align-middle ">

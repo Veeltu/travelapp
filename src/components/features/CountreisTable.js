@@ -1,6 +1,7 @@
 const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
   const hangleTableClick = (e) => {
     const a = e.currentTarget.dataset.id;
+    setHoverData("")
     setNameFilter(a);
   };
 
