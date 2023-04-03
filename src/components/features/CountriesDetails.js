@@ -13,6 +13,8 @@ function CountriesDetails({
     const countryNames = findCountry.map((e) => e.name.common);
     return countryNames;
   };
+  
+
 
   return (
     <div className="card w-96 bg-primary text-primary-content">
