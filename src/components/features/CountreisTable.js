@@ -23,7 +23,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
               <tr
                 className="hover"
                 onClick={(e) => hangleTableClick(e)}
-                hoverData
+                // hoverData
                 onMouseEnter={() => setHoverData(e)}
                 onMouseLeave={() => setHoverData("")}
                 key={e.name.common}

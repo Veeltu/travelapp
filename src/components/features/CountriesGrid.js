@@ -29,6 +29,8 @@ function CountriesGrid() {
   // coordinates for hover on table
   const [hoverData, setHoverData] = useState([]);
   // console.log(hoverData);
+  const [ hoverBorderData,setHoverBorderData] = useState([])
+// console.log(hoverBorderData)
 
   //fetch data
   useEffect(() => {
@@ -127,6 +129,7 @@ function CountriesGrid() {
                   // set data for detailPage and open detailPage
                   setNameFilter={setNameFilter}
                   setHoverData={setHoverData}
+                  
                 />
               </div>
             </>
@@ -145,6 +148,7 @@ function CountriesGrid() {
                   changeCountry={changeCountry}
                   //for img page
                   nameFilter={nameFilter}
+                  setHoverBorderData={setHoverBorderData}
                 />
               </div>
             </>
@@ -155,6 +159,7 @@ function CountriesGrid() {
             dataForDetailPage={dataForDetailPage}
             handleClickOnMap={handleClickOnMap}
             hoverData={hoverData}
+            hoverBorderData={hoverBorderData}
           />
           <Tooltip id="tooltip">{targetCountries}</Tooltip>
         </div>

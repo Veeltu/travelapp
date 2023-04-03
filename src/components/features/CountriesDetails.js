@@ -6,6 +6,7 @@ function CountriesDetails({
   backButton,
   changeCountry,
   nameFilter,
+  setHoverBorderData,
 }) {
   const borderCountries = (e) => {
     const findCountry = jsonData.filter((item) => e.includes(item.cca3));
@@ -86,6 +87,10 @@ function CountriesDetails({
                             key={e}
                             className="btn"
                             onClick={(e) => changeCountry(e)}
+                            onMouseEnter={() =>
+                              setHoverBorderData(borderCountries(e)[0])
+                            }
+                            onMouseLeave={() => setHoverBorderData("")}
                           >
                             {borderCountries(e)}
                           </ul>
