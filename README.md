@@ -9,8 +9,10 @@ work in progres
 7. add svg map
 8. sync svg map with table
 9. add tooltip
-10. change targetCountry on click on map ?
+10. change targetCountry on click on map 
 11. highlite hover on table and on map same time ?
+    + add hover higlite on border countries
+12. highlite country when click on map / when active
 
 ?change country without toogle on lick on map
 

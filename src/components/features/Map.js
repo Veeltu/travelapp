@@ -5,12 +5,14 @@ import {
   Annotation,
   ZoomableGroup,
   Marker,
+  hoverBorderData
 } from "react-simple-maps";
 import { useEffect, useState, memo } from "react";
 import "react-tooltip/dist/react-tooltip.css";
 import mapJson from "../mapJson.json";
 import { Tooltip } from "react-tooltip";
 import axios from "axios";
+import classNames from "classnames";
 
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
@@ -20,6 +22,7 @@ function MapChart({
   setTargetCountries,
   handleClickOnMap,
   hoverData,
+  hoverBorderData
 }) {
   const [apiMapData, setApiMapData] = useState([]);
   // state for zoom to target(detailPage) country
@@ -29,8 +32,9 @@ function MapChart({
   //hover states
   const [hoverTableName, setHoverTableName] = useState([]);
   const [hoverCoordinates, setHoverCoordinates] = useState([]);
+  console.log(hoverBorderData)
 
-  console.log(apiMapData);
+  // console.log(apiMapData);
   useEffect(() => {
     const getData = async () => {
       try {
@@ -57,11 +61,7 @@ function MapChart({
       setHoverCoordinates(reversCoordinates);
     }
   }, [hoverData]);
-
-  //add css to ? axios ?
-  // const changeColor = mapJson.find(
-  //   (e) => e..name === hoverTableName
-  // );
+  // console.log(hoverTableName)
 
   // getting coordinates (have to revers them to mach mapApi with countriesApi data)
   useEffect(() => {
@@ -76,51 +76,55 @@ function MapChart({
     }
   }, [dataForDetailPage]);
 
+  // show name on map - Marker
   const nameOnMap = dataForDetailPage.map((e) => e.name.common);
 
   return (
-    <>
-      <ComposableMap
-        className="w-full h-full shadow-xl cursor-pointer card bg-white/5 drop-shadow-xl "
-        data-tooltip-id="tooltip"
-        data-tooltip-float="true"
-        projection="geoEqualEarth"
-        projectionConfig={{
-          scale: 200,
-        }}
-      >
-        // hoverCoordinates ?
-        <ZoomableGroup center={targetCoordinates} zoom={4}>
-          <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map((geo) => (
-                <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  className={
-                    "hover:fill-accent active:fill-warning focus:fill-warning   fill-slate-100  outline-none"
-                  }
-                  onMouseEnter={() => {
-                    const name = geo.properties.name;
-                    setTargetCountries(name);
-                  }}
-                  onMouseLeave={() => setTargetCountries("")}
-                  onClick={() => {
-                    const name = geo.properties.name;
-                    handleClickOnMap(name);
-                  }}
-                />
-              ))
-            }
-          </Geographies>
-          <Marker coordinates={targetCoordinates}>
-            <text textAnchor="middle" className="font-bold fill-accent ">
-              {nameOnMap}
-            </text>
-          </Marker>
-        </ZoomableGroup>
-      </ComposableMap>
-    </>
+<>
+<ComposableMap
+  className="w-full h-full shadow-xl cursor-pointer card bg-white/5 drop-shadow-xl "
+  data-tooltip-id="tooltip"
+  data-tooltip-float="true"
+  projection="geoEqualEarth"
+  projectionConfig={{
+    scale: 200,
+  }}
+>
+  <ZoomableGroup center={targetCoordinates} zoom={5}>
+    <Geographies geography={geoUrl}>
+      {({ geographies }) =>
+        geographies.map((geo, index) => {
+          const isHover = geo.properties.name === hoverTableName || geo.properties.name === hoverBorderData
+          // || geo.properties.name ===hoverBorderData[0]
+          const fillColor = isHover ? "fill-warning" : "fill-white";
+          return (
+            <Geography
+              key={geo.rsmKey}
+              geography={geo}
+              className={`${fillColor} focus:fill-warning outline-none`}
+              onMouseEnter={() => {
+                const name = geo.properties.name;
+                setTargetCountries(name);
+              }}
+              onMouseLeave={() => setTargetCountries("")}
+              onClick={() => {
+                const name = geo.properties.name;
+                handleClickOnMap(name);
+              }}
+            />
+          );
+        })}
+    </Geographies>
+    <Marker coordinates={targetCoordinates}>
+      <text textAnchor="middle" className="font-bold fill-accent ">
+        {nameOnMap}
+      </text>
+    </Marker>
+  </ZoomableGroup>
+</ComposableMap>
+</>
   );
 }
 export default memo(MapChart);
+
+// hover:fill-accent
