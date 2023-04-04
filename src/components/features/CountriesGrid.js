@@ -17,7 +17,7 @@ function CountriesGrid() {
   // filters by name and continent
   const [filterByContinent, setFilterByContinent] = useState("All");
   const [inputTextToFilter, setInputTextToFilter] = useState("");
-  const [finalFilerToCardsGrid, setFilterToCardsGrid] = useState([]);
+  const [filterResult, setFilterResult] = useState([]);
   // name of coutry use to filter from big data
   const [nameFilter, setNameFilter] = useState();
   // array for detailPage
@@ -29,8 +29,8 @@ function CountriesGrid() {
   // coordinates for hover on table
   const [hoverData, setHoverData] = useState([]);
   // console.log(hoverData);
-  const [ hoverBorderData,setHoverBorderData] = useState([])
-// console.log(hoverBorderData)
+  const [hoverBorderData, setHoverBorderData] = useState([]);
+  // console.log(hoverBorderData)
 
   //fetch data
   useEffect(() => {
@@ -38,7 +38,7 @@ function CountriesGrid() {
       try {
         const resp = await axios.get(url + "all");
         setJsonData(resp.data);
-        setFilterToCardsGrid(resp.data);
+        setFilterResult(resp.data);
       } catch (error) {
         console.log(error.data);
       }
@@ -53,9 +53,24 @@ function CountriesGrid() {
     toggle();
   }, [nameFilter]);
 
-  //function => click on map show detail page of target country
+  // difrences in country names in api-s, index is important !
+  const mapNameDifrences = [
+    "United States of America",
+    "Democratic Republic of the Congo",
+  ];
+  const restCountriesDifrence = ["United States", "Republic of the Congo"];
+
+  //function => click on map show detail page of target countr
   const handleClickOnMap = (target) => {
+    // check if target is in mapNameDifrences
+    if (mapNameDifrences.includes(target)) {
+      // get the corresponding index of the target in mapNameDifrences
+      const targetIndex = mapNameDifrences.indexOf(target);
+      // update target to the corresponding country in restCountriesDifrence
+      target = restCountriesDifrence[targetIndex];
+    }
     const detailData = jsonData.filter((e) => e.name.common === target);
+
     if (nameFilter != undefined) {
       setDataForDetailPage(detailData);
     } else {
@@ -67,21 +82,22 @@ function CountriesGrid() {
     const target = e.currentTarget.textContent;
     const detailData = jsonData.filter((e) => e.name.common === target);
     setDataForDetailPage(detailData);
-    setHoverBorderData('')
+    setHoverBorderData("");
   };
   //filterByContinent
   useEffect(() => {
     let result = jsonData;
     if (filterByContinent !== "All")
       result = result.filter((e) => e.region === filterByContinent);
-    setFilterToCardsGrid(result);
+    setFilterResult(result);
+    // setContinentZoomCoordinates() ?
   }, [filterByContinent]);
   //name filter
   useEffect(() => {
     const filteredData = jsonData.filter((e) => {
       return e.name.common.toLowerCase().includes(inputTextToFilter);
     });
-    setFilterToCardsGrid(filteredData);
+    setFilterResult(filteredData);
   }, [inputTextToFilter]);
 
   const toggle = () => setDetailPageView((wasOpened) => !wasOpened);
@@ -89,12 +105,15 @@ function CountriesGrid() {
 
   //close details => outside click and ESC
   const myRef = useRef();
-  const handleClickOutside = (e) => {
-    if (myRef.current === null) {
-    } else if (!myRef.current.contains(e.target)) {
-      setNameFilter(undefined); //clear "detail page" state
-    }
-  };
+
+  //outside click close function
+  // const handleClickOutside = (e) => {
+  //   if (myRef.current === null) {
+  //   } else if (!myRef.current.contains(e.target)) {
+  //     setNameFilter(undefined); //clear "detail page" state
+  //   }
+  // };
+
   const handleEscapeClose = (e) => {
     if (e.key === "Escape") {
       setNameFilter(undefined); //clear "detail page" state
@@ -103,11 +122,10 @@ function CountriesGrid() {
 
   useEffect(() => {
     document.addEventListener("keydown", handleEscapeClose);
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    // document.addEventListener("mousedown", handleClickOutside);
+    // return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
- 
   return (
     <>
       <div className="flex flex-col justify-center align-middle ">
@@ -121,17 +139,15 @@ function CountriesGrid() {
             filterByContinent={filterByContinent}
           />
         </div>
-
         <div className="flex flex-row justify-between w-full px-12 py-10 mx-auto max-w-7xl">
           {detailPageView ? (
             <>
               <div className="cursor-pointer">
                 <CountriesTable
-                  data={finalFilerToCardsGrid}
+                  data={filterResult}
                   // set data for detailPage and open detailPage
                   setNameFilter={setNameFilter}
                   setHoverData={setHoverData}
-                  
                 />
               </div>
             </>
@@ -140,7 +156,7 @@ function CountriesGrid() {
               <div
                 className="flex justify-center align-middle"
                 ref={myRef}
-                onClick={handleClickOutside}
+                // onClick={handleClickOutside}
               >
                 <CountriesDetails
                   data={dataForDetailPage}
@@ -155,7 +171,6 @@ function CountriesGrid() {
               </div>
             </>
           )}
-
           <MapChart
             setTargetCountries={setTargetCountries}
             dataForDetailPage={dataForDetailPage}

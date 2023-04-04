@@ -13,8 +13,6 @@ function CountriesDetails({
     const countryNames = findCountry.map((e) => e.name.common);
     return countryNames;
   };
-  
-
 
   return (
     <div className="card w-96 bg-primary text-primary-content">
@@ -81,32 +79,39 @@ function CountriesDetails({
                   </div>
                 </div>
                 <div className=" sm:col-span-2 sm:mt-2">
-                  <span className="font-semibold"> Border countries: </span>
-                  <div className="flex flex-wrap gap-2">
-                    {e.borders
-                      ? e.borders.map((e) => (
-                          <ul
-                            key={e}
-                            className="btn"
-                            onClick={(e) => changeCountry(e)}
-                            onMouseEnter={() =>
-                              setHoverBorderData(borderCountries(e)[0])
-                            }
-                            onMouseLeave={() => setHoverBorderData("")}
-                          >
-                            {borderCountries(e)}
-                          </ul>
-                        ))
-                      : "none"}
+                  <Link to="/images" state={nameFilter}>
+                    <button className="btn btn-wide btn-large btn-secondary">
+                      images
+                    </button>
+                  </Link>
+                  <div>
+                    <span className="font-semibold"> Border countries: </span>
+                    <div className="flex flex-wrap gap-2">
+                      {e.borders
+                        ? e.borders.map((e) => (
+                            <ul
+                              key={e}
+                              className="btn"
+                              onClick={(e) => changeCountry(e)}
+                              onMouseEnter={() =>
+                                setHoverBorderData(borderCountries(e)[0])
+                              }
+                              onMouseLeave={() => setHoverBorderData("")}
+                            >
+                              {borderCountries(e)}
+                            </ul>
+                          ))
+                        : "none"}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <Link to="/images" state={nameFilter}>
-          <button className="btn">images</button>
-        </Link>
+        {/* <Link to="/images" state={nameFilter}>
+          <button className="btn btn-wide btn-large btn-secondary">images</button>
+        </Link> */}
       </main>
     </div>
   );

@@ -5,7 +5,6 @@ import {
   Annotation,
   ZoomableGroup,
   Marker,
-  hoverBorderData,
 } from "react-simple-maps";
 import { useEffect, useState, memo } from "react";
 import "react-tooltip/dist/react-tooltip.css";
@@ -27,10 +26,9 @@ function MapChart({
   // why I need cca3 ?
   const [cca3Name, setCca3Name] = useState("");
   //hover states
-  const [hoverTableName, setHoverTableName] = useState([]);
+  const [hoverTableName, setHoverTableName] = useState('');
   const [hoverCoordinates, setHoverCoordinates] = useState([]);
 
-  // console.log(apiMapData);
   useEffect(() => {
     const getData = async () => {
       try {
@@ -51,13 +49,13 @@ function MapChart({
       // set name of hover country
       const hoverName = hoverData.name.common;
       setHoverTableName(hoverName);
-      // set coordiantes of hover country
-      const hoverCoordinates = hoverData.latlng;
-      const reversCoordinates = hoverCoordinates.slice().reverse();
-      setHoverCoordinates(reversCoordinates);
+
+      // set coordiantes of hover country to zoom on hover
+      // const hoverCoordinates = hoverData.latlng;
+      // const reversCoordinates = hoverCoordinates.slice().reverse();
+      // setHoverCoordinates(reversCoordinates);
     }
   }, [hoverData]);
-  // console.log(hoverTableName)
 
   // getting coordinates (have to revers them to mach mapApi with countriesApi data)
   useEffect(() => {
@@ -74,10 +72,8 @@ function MapChart({
 
   // show name on map - Marker
   const nameOnMap = dataForDetailPage.map((e) => e.name.common);
+  // take out string to fill target country from detail page
   const nameOnMapString = nameOnMap[0];
-
-  console.log(`nameDetail ${nameOnMapString}`);
-  // console.log(`hover ${hoverTableName}`);
 
   return (
     <>
@@ -90,7 +86,7 @@ function MapChart({
           scale: 200,
         }}
       >
-        <ZoomableGroup center={targetCoordinates} zoom={5}>
+        <ZoomableGroup center={targetCoordinates} zoom={4}>
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo, index) => {
@@ -126,7 +122,7 @@ function MapChart({
             }
           </Geographies>
           <Marker coordinates={targetCoordinates}>
-            <text textAnchor="middle" className="font-bold fill-accent ">
+            <text textAnchor="middle" className="font-bold fill-info ">
               {nameOnMap}
             </text>
           </Marker>

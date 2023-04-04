@@ -8,6 +8,7 @@ function FilterByContinent({  setFilterByContinent,filterByContinent }) {
     "Americas",
     "Africa",
     "Europe",
+    "Oceania",
   ];
 
   return (
