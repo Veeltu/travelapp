@@ -15,18 +15,23 @@ work in progres
     + when click on border and open new detail window , hoverBorderCountry dont rest
     + hide actual hover from click on map
 12. highlite country when click on map / when active
-13. when change theme when detail page is open, its closing ?
-14. how to hide apikey ?
+13. when change theme when detail page is open, its closing 
+14. add scroll to table with back to top button
+15. bugfix- diffrent names in api-s
+
+
+
+-------------optional----------------
+14. how to hide apikey ? for unsplash with limit 50 on 1h dont need it /
 15. zoom on continent when filter ?
+16. alternative api from json when fetch fail ?
 
+styling
+dont forget to mobile
 
-
-
-
-?change country without toogle on lick on map
 
 TODO
-map - target capital city too
+map - target capital city too ?
 map - close up buttons ?
 shorter table
 money
@@ -34,9 +39,3 @@ small themes number
 
 idea
 pineski on map ? save on profile
-
-notes :
-geo.properties:
-{ name: 'Norway', 'Alpha-2': 'NO' }
-geo.properties:
-{ name: 'Russia', 'Alpha-2': 'RU' }
