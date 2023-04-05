@@ -9,6 +9,7 @@ import {
 import { useEffect, useState, memo } from "react";
 import "react-tooltip/dist/react-tooltip.css";
 import axios from "axios";
+import { useSpring, animated } from "react-spring";
 
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
@@ -26,7 +27,7 @@ function MapChart({
   // why I need cca3 ?
   const [cca3Name, setCca3Name] = useState("");
   //hover states
-  const [hoverTableName, setHoverTableName] = useState('');
+  const [hoverTableName, setHoverTableName] = useState("");
   const [hoverCoordinates, setHoverCoordinates] = useState([]);
 
   useEffect(() => {
@@ -75,6 +76,18 @@ function MapChart({
   // take out string to fill target country from detail page
   const nameOnMapString = nameOnMap[0];
 
+  const SmoothMarker = ({ targetCoordinates, nameOnMap }) => {
+    const props = useSpring({
+      transform: `translate(${targetCoordinates[0]}, ${targetCoordinates[1]})`,
+      config: { mass: 2, tension: 4000, friction: 10000, velocity: 1 },
+      from: {
+        transform: `translate(${targetCoordinates[0]}, ${
+          targetCoordinates[1] - 10
+        })`,
+      },
+    });
+  };
+
   return (
     <>
       <ComposableMap
@@ -83,8 +96,10 @@ function MapChart({
         data-tooltip-float="true"
         projection="geoEqualEarth"
         projectionConfig={{
-          scale: 200,
+          scale: 100,
         }}
+        width={200}
+        height={200}
       >
         <ZoomableGroup center={targetCoordinates} zoom={4}>
           <Geographies geography={geoUrl}>
@@ -104,6 +119,7 @@ function MapChart({
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
+                    fill="hsl(var(--sc))" // css variable from daisyUI for work with themes
                     className={`${fillIsActive} 
                     ${fillColor} 
                     hover:fill-secondary outline-none `}
@@ -121,11 +137,21 @@ function MapChart({
               })
             }
           </Geographies>
-          <Marker coordinates={targetCoordinates}>
-            <text textAnchor="middle" className="font-bold fill-info ">
+          {/* <Marker coordinates={targetCoordinates}>
+            <text textAnchor="middle" 
+            className="font-bold fill-info text-sm" 
+            style={{ fontSize: '9px' }}
+            transitionDuration={500}
+            >
               {nameOnMap}
             </text>
-          </Marker>
+          </Marker> */}
+          {/* <SmoothMarker targetCoordinates={targetCoordinates} nameOnMap={nameOnMapString} /> */}
+
+          <SmoothMarker
+            targetCoordinates={targetCoordinates}
+            nameOnMap={nameOnMap}
+          />
         </ZoomableGroup>
       </ComposableMap>
     </>
@@ -133,4 +159,3 @@ function MapChart({
 }
 
 export default memo(MapChart);
-

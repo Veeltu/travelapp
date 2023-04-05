@@ -34,7 +34,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
           onScroll={handleScroll}
           ref={(node) => (tableRef.current = node)}
         >
-          <table className="table w-full text-xs">
+          <table className="table text-xs">
             <thead className="sticky top-0 z-10">
               <tr>
                 <th>flag</th>
@@ -58,7 +58,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
                     </div>
                   </td>
                   <td>
-                    <div className="font-bold ">
+                    <div className="font-bold w-20 overflow-hidden">
                       <h2>{e.name.common}</h2>
                     </div>
                   </td>
