@@ -76,18 +76,6 @@ function MapChart({
   // take out string to fill target country from detail page
   const nameOnMapString = nameOnMap[0];
 
-  const SmoothMarker = ({ targetCoordinates, nameOnMap }) => {
-    const props = useSpring({
-      transform: `translate(${targetCoordinates[0]}, ${targetCoordinates[1]})`,
-      config: { mass: 2, tension: 4000, friction: 10000, velocity: 1 },
-      from: {
-        transform: `translate(${targetCoordinates[0]}, ${
-          targetCoordinates[1] - 10
-        })`,
-      },
-    });
-  };
-
   return (
     <>
       <ComposableMap
@@ -137,21 +125,15 @@ function MapChart({
               })
             }
           </Geographies>
-          {/* <Marker coordinates={targetCoordinates}>
-            <text textAnchor="middle" 
-            className="font-bold fill-info text-sm" 
-            style={{ fontSize: '9px' }}
-            transitionDuration={500}
+          <Marker coordinates={targetCoordinates}>
+            <text
+              textAnchor="middle"
+              className="font-bold fill-info text-sm"
+              style={{ fontSize: "9px" }}
             >
               {nameOnMap}
             </text>
-          </Marker> */}
-          {/* <SmoothMarker targetCoordinates={targetCoordinates} nameOnMap={nameOnMapString} /> */}
-
-          <SmoothMarker
-            targetCoordinates={targetCoordinates}
-            nameOnMap={nameOnMap}
-          />
+          </Marker>
         </ZoomableGroup>
       </ComposableMap>
     </>
