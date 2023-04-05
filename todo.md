@@ -19,6 +19,12 @@ work in progres
 14. add scroll to table with back to top button
 15. bugfix- diffrent names in api-s
 
+-------------TODOs----------------
++ integration with daisyUI
++ map size and coordinates hover changes
++ how to add smother transitions ?
+- fill dont work on usa and congo / why ?
+
 
 
 -------------optional----------------
