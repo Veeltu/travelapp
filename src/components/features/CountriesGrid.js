@@ -128,21 +128,30 @@ function CountriesGrid() {
 
   return (
     <>
-      <div className="flex flex-col justify-center align-middle ">
+      <div className="flex flex-col justify-center align-middle max-w-7xl ">
         <div className="flex flex-col items-center justify-between w-full px-4 py-6 mx-auto h-9 sm:flex-row max-w-7xl">
           <FilterByName
             setInputTextToFilter={setInputTextToFilter}
             inputTextToFilter={inputTextToFilter}
           />
-          <FilterByContinent
+          {/* <FilterByContinent
             setFilterByContinent={setFilterByContinent}
             filterByContinent={filterByContinent}
-          />
+          /> */}
         </div>
-        <div className="flex flex-row justify-between w-full px-12 py-10 mx-auto max-w-7xl">
+        <div className="flex flex-col justify-center md:flex-row md:justify-around w-full px-12 py-10 mx-auto max-w-7xl">
+          <div className="cursor-pointer flex justify-center">
+          <MapChart
+            setTargetCountries={setTargetCountries}
+            dataForDetailPage={dataForDetailPage}
+            handleClickOnMap={handleClickOnMap}
+            hoverData={hoverData}
+            hoverBorderData={hoverBorderData}
+            />
+            </div>
           {detailPageView ? (
             <>
-              <div className="cursor-pointer">
+              <div className="cursor-pointer flex justify-center ">
                 <CountriesTable
                   data={filterResult}
                   // set data for detailPage and open detailPage
@@ -171,13 +180,6 @@ function CountriesGrid() {
               </div>
             </>
           )}
-          <MapChart
-            setTargetCountries={setTargetCountries}
-            dataForDetailPage={dataForDetailPage}
-            handleClickOnMap={handleClickOnMap}
-            hoverData={hoverData}
-            hoverBorderData={hoverBorderData}
-          />
           <Tooltip id="tooltip">{targetCountries}</Tooltip>
         </div>
       </div>

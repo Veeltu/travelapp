@@ -76,18 +76,19 @@ function MapChart({
   // take out string to fill target country from detail page
   const nameOnMapString = nameOnMap[0];
 
+  
+
   return (
     <>
+    <div className="h-1/2  w-max">
       <ComposableMap
         className="w-full h-full shadow-xl cursor-pointer card bg-white/5 drop-shadow-xl "
         data-tooltip-id="tooltip"
         data-tooltip-float="true"
         projection="geoEqualEarth"
         projectionConfig={{
-          scale: 100,
+          scale: 220,
         }}
-        width={200}
-        height={200}
       >
         <ZoomableGroup center={targetCoordinates} zoom={4}>
           <Geographies geography={geoUrl}>
@@ -136,6 +137,7 @@ function MapChart({
           </Marker>
         </ZoomableGroup>
       </ComposableMap>
+      </div>
     </>
   );
 }
