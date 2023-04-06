@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
-  const [showButton, setShowButton] = useState(true);
+  const [showButton, setShowButton] = useState(false);
   const tableRef = useRef(null);
 
   const handleTableClick = (e) => {
@@ -12,7 +12,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
   };
 
   const handleScroll = (e) => {
-    if (e.target.scrollTop >= 20) {
+    if (e.target.scrollTop >= 2000) {
       setShowButton(true);
     } else {
       setShowButton(false);
@@ -58,7 +58,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
                     </div>
                   </td>
                   <td>
-                    <div className="font-bold w-20 overflow-hidden">
+                    <div className="font-bold overflow-hidden">
                       <h2>{e.name.common}</h2>
                     </div>
                   </td>

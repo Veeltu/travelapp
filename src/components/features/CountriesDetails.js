@@ -15,8 +15,8 @@ function CountriesDetails({
   };
 
   return (
-    <div className="card w-96 bg-primary text-primary-content">
-      <main className="">
+    <div className="card bg-primary text-primary-content">
+      <main className=" w-full">
         <button className="btn " onClick={backButton}>
           GET BACK
         </button>

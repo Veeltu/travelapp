@@ -3,7 +3,7 @@ import UpperTab from "../features/UpperTab";
 
 function MainView() {
   return (
-    <div>
+    <div className="px-10 flex flex-col justify-center items-center">
         <UpperTab />
         <CountriesGrid />
     </div>
