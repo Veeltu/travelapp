@@ -15,9 +15,9 @@ function CountriesDetails({
   };
 
   return (
-    <div className="card bg-primary text-primary-content">
+    <div className="card min-h-[600px] bg-primary text-primary-content flex flex-col space-x-4">
       <main className=" w-full">
-        <button className="btn " onClick={backButton}>
+        <button className="btn m-5" onClick={backButton}>
           GET BACK
         </button>
         <div className="">
@@ -25,11 +25,11 @@ function CountriesDetails({
             <div
               key={e.name.common}
               data-id={e.name.common}
-              className="flex flex-col justify-center mx-auto lg:gap-5 lg:grid-cols-2 lg:justify-between lg:text-left"
+              className="flex flex-col mx-auto lg:gap-5 px-5 lg:grid-cols-2 lg:justify-between lg:text-left"
             >
               <div className="avatar">
                 <div className="w-24 rounded">
-                  <img className="mb-5" alt="flag" src={e.flags.png}></img>
+                  <img className="mb-5 mt-5" alt="flag" src={e.flags.png}></img>
                 </div>
               </div>
               <div className=" grid lg:grid-cols-2 grid-rows-[2.6em] gap-x-5">
@@ -80,13 +80,13 @@ function CountriesDetails({
                 </div>
                 <div className=" sm:col-span-2 sm:mt-2">
                   <Link to="/images" state={nameFilter}>
-                    <button className="btn btn-wide btn-large btn-secondary">
+                    <button className="btn btn-wide btn-large btn-secondary my-5">
                       images
                     </button>
                   </Link>
                   <div>
                     <span className="font-semibold"> Border countries: </span>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 py-5">
                       {e.borders
                         ? e.borders.map((e) => (
                             <ul
