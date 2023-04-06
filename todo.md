@@ -23,6 +23,10 @@ work in progres
 + integration with daisyUI
 + map size and coordinates hover changes
 + how to add smother transitions ?
+    problem is in react simple map,
++ add filters to table
++ smaller detail page fonts, flag buttons etc
+    
 - fill dont work on usa and congo / why ?
 
 
