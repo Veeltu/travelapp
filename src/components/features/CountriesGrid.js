@@ -14,7 +14,7 @@ const url = "https://restcountries.com/v3.1/";
 
 function CountriesGrid() {
   const [jsonData, setJsonData] = useState([]);
-  // filters by name and continent
+  // states to menage filters
   const [filterByContinent, setFilterByContinent] = useState("All");
   const [inputTextToFilter, setInputTextToFilter] = useState("");
   const [filterResult, setFilterResult] = useState([]);
@@ -26,7 +26,7 @@ function CountriesGrid() {
   const [detailPageView, setDetailPageView] = useState(false);
   // state for tooltip
   const [targetCountries, setTargetCountries] = useState("");
-  // coordinates for hover on table
+  // coordinates for hover on table to pass for ract-simple-map
   const [hoverData, setHoverData] = useState([]);
   // console.log(hoverData);
   const [hoverBorderData, setHoverBorderData] = useState([]);
@@ -60,7 +60,7 @@ function CountriesGrid() {
   ];
   const restCountriesDifrence = ["United States", "Republic of the Congo"];
 
-  //function => click on map show detail page of target countr
+  //click on map show detail page of target country
   const handleClickOnMap = (target) => {
     // check if target is in mapNameDifrences
     if (mapNameDifrences.includes(target)) {
@@ -78,6 +78,8 @@ function CountriesGrid() {
     }
   };
 
+  // <handleClickOnMap target={target}></handleClickOnMap>;
+
   const changeCountry = (e) => {
     const target = e.currentTarget.textContent;
     const detailData = jsonData.filter((e) => e.name.common === target);
@@ -92,6 +94,7 @@ function CountriesGrid() {
     setFilterResult(result);
     // setContinentZoomCoordinates() ?
   }, [filterByContinent]);
+
   //name filter
   useEffect(() => {
     const filteredData = jsonData.filter((e) => {
@@ -169,7 +172,6 @@ function CountriesGrid() {
                 // onClick={handleClickOutside}
               >
                 <CountriesDetails
-                className=""
                   data={dataForDetailPage}
                   //to filter border countries
                   jsonData={jsonData}
