@@ -5,7 +5,7 @@ function CountriesDetails({
   jsonData,
   backButton,
   changeCountry,
-  nameFilter,
+  // nameFilter,
   setHoverBorderData,
 }) {
   const borderCountries = (e) => {
@@ -79,7 +79,7 @@ function CountriesDetails({
                   </div>
                 </div>
                 <div className=" sm:col-span-2 sm:mt-2">
-                  <Link to="/images" state={nameFilter}>
+                  <Link to="/images" state={data}>
                     <button className="btn btn-wide btn-large btn-secondary my-5">
                       images
                     </button>

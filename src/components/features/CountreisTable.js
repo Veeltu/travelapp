@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import FilterByName from "./filters/FilterByName";
 
 const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
   const [showButton, setShowButton] = useState(false);

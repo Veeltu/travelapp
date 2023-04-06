@@ -1,4 +1,16 @@
-function FilterByName({ setInputTextToFilter, inputTextToFilter }) {
+import { useEffect, useState } from "react";
+
+function FilterByName({jsonData, setFilterResults }) {
+  
+  const [inputTextToFilter, setInputTextToFilter] = useState("");
+
+  useEffect(() => {
+    const filteredData = jsonData.filter((e) => {
+      return e.name.common.toLowerCase().includes(inputTextToFilter);
+    });
+    setFilterResults(filteredData);
+  }, [inputTextToFilter]);
+
   return (
     <div>
       <div className="relative block ">

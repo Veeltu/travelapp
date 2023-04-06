@@ -24,7 +24,7 @@ work in progres
 
 -------------TODOs----------------
 
-- add filters to table
+- NEXT add filters to table
 - smaller detail page fonts, flag buttons etc
 - table too wide
 - add basic responsive

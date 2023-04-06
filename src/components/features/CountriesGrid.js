@@ -9,23 +9,21 @@ import MapChart from "./Map";
 
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
+import { checkDifrences } from "./checkDifrences";
 
 const url = "https://restcountries.com/v3.1/";
 
 function CountriesGrid() {
   const [jsonData, setJsonData] = useState([]);
-  // states to menage filters
-  const [filterByContinent, setFilterByContinent] = useState("All");
-  const [inputTextToFilter, setInputTextToFilter] = useState("");
   const [filterResult, setFilterResult] = useState([]);
   // name of coutry use to filter from big data
   const [nameFilter, setNameFilter] = useState();
   // array for detailPage
   const [dataForDetailPage, setDataForDetailPage] = useState([]);
   // show/ hide detailPage
-  const [detailPageView, setDetailPageView] = useState(false);
+  const [detailPageViewShow, setDetailPageViewShow] = useState(false);
   // state for tooltip
-  const [targetCountries, setTargetCountries] = useState("");
+  const [tooltipCountry, setTooltipCountry] = useState("");
   // coordinates for hover on table to pass for ract-simple-map
   const [hoverData, setHoverData] = useState([]);
   // console.log(hoverData);
@@ -46,65 +44,28 @@ function CountriesGrid() {
     getData();
   }, []);
 
-  //set data for detailPage and toggle detailPage
-  useEffect(() => {
-    const detailData = jsonData.filter((e) => e.name.common === nameFilter);
-    setDataForDetailPage(detailData);
-    toggle();
-  }, [nameFilter]);
+  const filterName = (nameCountry) => {
+  const countryData = jsonData.filter((e) => e.name.common === nameCountry);
+  setDataForDetailPage(countryData);
+  if (detailPageViewShow === false) {setDetailPageViewShow(true)}
+  }
 
-  // difrences in country names in api-s, index is important !
-  const mapNameDifrences = [
-    "United States of America",
-    "Democratic Republic of the Congo",
-  ];
-  const restCountriesDifrence = ["United States", "Republic of the Congo"];
-
-  //click on map show detail page of target country
-  const handleClickOnMap = (target) => {
-    // check if target is in mapNameDifrences
-    if (mapNameDifrences.includes(target)) {
-      // get the corresponding index of the target in mapNameDifrences
-      const targetIndex = mapNameDifrences.indexOf(target);
-      // update target to the corresponding country in restCountriesDifrence
-      target = restCountriesDifrence[targetIndex];
-    }
-    const detailData = jsonData.filter((e) => e.name.common === target);
-
-    if (nameFilter != undefined) {
-      setDataForDetailPage(detailData);
-    } else {
-      setNameFilter(target);
-    }
-  };
-
-  // <handleClickOnMap target={target}></handleClickOnMap>;
-
+const handleClickOnMap = (nameCountry) => {
+  const country = checkDifrences(nameCountry)
+  filterName(country)
+}
+  
   const changeCountry = (e) => {
     const target = e.currentTarget.textContent;
     const detailData = jsonData.filter((e) => e.name.common === target);
     setDataForDetailPage(detailData);
     setHoverBorderData("");
   };
-  //filterByContinent
-  useEffect(() => {
-    let result = jsonData;
-    if (filterByContinent !== "All")
-      result = result.filter((e) => e.region === filterByContinent);
-    setFilterResult(result);
-    // setContinentZoomCoordinates() ?
-  }, [filterByContinent]);
 
-  //name filter
-  useEffect(() => {
-    const filteredData = jsonData.filter((e) => {
-      return e.name.common.toLowerCase().includes(inputTextToFilter);
-    });
-    setFilterResult(filteredData);
-  }, [inputTextToFilter]);
-
-  const toggle = () => setDetailPageView((wasOpened) => !wasOpened);
-  const resetDetailState = () => setNameFilter(undefined);
+  const resetDetailState = () => {
+    setDataForDetailPage([])
+    setDetailPageViewShow(false)
+  }
 
   //close details => outside click and ESC
   const myRef = useRef();
@@ -134,38 +95,27 @@ function CountriesGrid() {
       <div className="body flex flex-col justify-center align-middle max-w-7xl ">
         <div className="flex flex-col items-center justify-between w-full px-4 py-6 mx-auto h-9 sm:flex-row max-w-7xl">
           <FilterByName
-            setInputTextToFilter={setInputTextToFilter}
-            inputTextToFilter={inputTextToFilter}
+            jsonData={jsonData}
+            setFilterResults={setFilterResult}
           />
-          {/* <FilterByContinent
-            setFilterByContinent={setFilterByContinent}
-            filterByContinent={filterByContinent}
-          /> */}
+          <FilterByContinent
+            jsonData={jsonData}
+            setFilterResult={setFilterResult}
+          />
         </div>
         <div className=" grid grid-cols-12 w-full max-w-7xl">
           <div className="col-span-8 px-10" >
 
           <MapChart
-            setTargetCountries={setTargetCountries}
+            setTooltipCountry={setTooltipCountry}
             dataForDetailPage={dataForDetailPage}
             handleClickOnMap={handleClickOnMap}
             hoverData={hoverData}
             hoverBorderData={hoverBorderData}
             />
             </div>
-          {detailPageView ? (
-            <>
-              <div className="cursor-pointer col-span-4">
-                <CountriesTable
-                  data={filterResult}
-                  // set data for detailPage and open detailPage
-                  setNameFilter={setNameFilter}
-                  setHoverData={setHoverData}
-                />
-              </div>
-            </>
-          ) : (
-            <>
+          {detailPageViewShow ? (
+              <>
               <div
                 className="col-span-4"
                 ref={myRef}
@@ -178,13 +128,24 @@ function CountriesGrid() {
                   backButton={resetDetailState}
                   changeCountry={changeCountry}
                   //for img page
-                  nameFilter={nameFilter}
+                  // nameFilter={nameFilter}
                   setHoverBorderData={setHoverBorderData}
                 />
               </div>
             </>
+          ) : (
+            <>
+            <div className="cursor-pointer col-span-4">
+              <CountriesTable
+                data={filterResult}
+                // set data for detailPage and open detailPage
+                setNameFilter={filterName}
+                setHoverData={setHoverData}
+              />
+            </div>
+          </>
           )}
-          <Tooltip id="tooltip">{targetCountries}</Tooltip>
+          <Tooltip id="tooltip">{tooltipCountry}</Tooltip>
         </div>
       </div>
     </>

@@ -16,12 +16,12 @@ const geoUrl =
 
 function MapChart({
   dataForDetailPage,
-  setTargetCountries,
+  setTooltipCountry,
   handleClickOnMap,
   hoverData,
   hoverBorderData,
 }) {
-  const [apiMapData, setApiMapData] = useState([]);
+
   // state for zoom to target(detailPage) country
   const [targetCoordinates, setTargetCoordinates] = useState([]);
   // why I need cca3 ?
@@ -30,19 +30,7 @@ function MapChart({
   const [hoverTableName, setHoverTableName] = useState("");
   const [hoverCoordinates, setHoverCoordinates] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const resp = await axios.get(geoUrl);
-        setApiMapData(resp.data.objects);
-      } catch (error) {
-        console.log(error.data);
-      }
-    };
-    getData();
-  }, []);
-
-  // hover stuff
+  // hover logic
   useEffect(() => {
     if (hoverData.length === 0) {
       setHoverTableName([]);
@@ -114,9 +102,9 @@ function MapChart({
                     hover:fill-secondary outline-none `}
                     onMouseEnter={() => {
                       const name = geo.properties.name;
-                      setTargetCountries(name);
+                      setTooltipCountry(name);
                     }}
-                    onMouseLeave={() => setTargetCountries("")}
+                    onMouseLeave={() => setTooltipCountry("")}
                     onClick={() => {
                       const name = geo.properties.name;
                       handleClickOnMap(name);

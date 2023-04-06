@@ -10,9 +10,11 @@ function Images() {
   const [unsplashData, setUnsplashData] = useState([]);
   console.log(unsplashData);
 
-  const data = useLocation();
-  const name = data.state; // const for search unsplash
-  console.log(name);
+  const locationData = useLocation();
+  const data = locationData.state; // const for search unsplash
+  console.log(data)
+  const name = data.map(el => el.name.common)
+  console.log(name)
   const accessKey = "lf8U9V07h_SeLEJ0OeuNA2o3NyWKjUZ0UjWL2jWJ26c";
 
   useEffect(() => {

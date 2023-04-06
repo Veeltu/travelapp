@@ -1,6 +1,10 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
-function FilterByContinent({  setFilterByContinent,filterByContinent }) {
+
+function FilterByContinent({ jsonData, setFilterResult }) {
+
+  const [filterByContinent, setFilterByContinent] = useState("All");
+
   //list of cont. for filter
   const continents = [
     "All",
@@ -10,6 +14,13 @@ function FilterByContinent({  setFilterByContinent,filterByContinent }) {
     "Europe",
     "Oceania",
   ];
+
+  useEffect(() => {
+    let result = jsonData;
+    if (filterByContinent !== "All")
+      result = result.filter((e) => e.region === filterByContinent);
+    setFilterResult(result);
+  }, [filterByContinent]);
 
   return (
     <div>
@@ -29,5 +40,3 @@ function FilterByContinent({  setFilterByContinent,filterByContinent }) {
 }
 
 export default FilterByContinent;
-
-// className="block w-full max-w-sm py-2 pr-3 border-none rounded-md shadow-xl bg-White border-slate-300 pl-9 sm:text-sm"
