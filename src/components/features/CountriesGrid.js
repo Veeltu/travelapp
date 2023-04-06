@@ -128,7 +128,7 @@ function CountriesGrid() {
 
   return (
     <>
-      <div className="body   flex flex-col justify-center align-middle max-w-7xl ">
+      <div className="body flex flex-col justify-center align-middle max-w-7xl ">
         <div className="flex flex-col items-center justify-between w-full px-4 py-6 mx-auto h-9 sm:flex-row max-w-7xl">
           <FilterByName
             setInputTextToFilter={setInputTextToFilter}
@@ -139,8 +139,8 @@ function CountriesGrid() {
             filterByContinent={filterByContinent}
           /> */}
         </div>
-        <div className=" grid grid-cols-4 gap-2 w-full max-w-7xl">
-          <div className="col-span-2 " >
+        <div className=" grid grid-cols-12 w-full max-w-7xl">
+          <div className="col-span-8 px-10" >
 
           <MapChart
             setTargetCountries={setTargetCountries}
@@ -152,7 +152,7 @@ function CountriesGrid() {
             </div>
           {detailPageView ? (
             <>
-              <div className="cursor-pointer col-span-2">
+              <div className="cursor-pointer col-span-4">
                 <CountriesTable
                   data={filterResult}
                   // set data for detailPage and open detailPage
@@ -164,7 +164,7 @@ function CountriesGrid() {
           ) : (
             <>
               <div
-                className="col-span-2"
+                className="col-span-4"
                 ref={myRef}
                 // onClick={handleClickOutside}
               >

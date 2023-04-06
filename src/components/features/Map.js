@@ -80,16 +80,15 @@ function MapChart({
 
   return (
     <>
-    <div className="ra">
+    <div className="h-[450px]">
       <ComposableMap
         className="w-full h-full shadow-xl cursor-pointer card bg-white/5 drop-shadow-xl "
         data-tooltip-id="tooltip"
         data-tooltip-float="true"
         projection="geoEqualEarth"
         projectionConfig={{
-          scale: 220,
+          scale: 230,
         }}
-        width="800"
       >
         <ZoomableGroup center={targetCoordinates} zoom={4}>
           <Geographies geography={geoUrl}>

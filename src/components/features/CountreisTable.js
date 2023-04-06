@@ -58,12 +58,12 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
                     </div>
                   </td>
                   <td>
-                    <div className="font-bold overflow-hidden">
+                    <div className="font-bold text-xs overflow-hidden">
                       <h2>{e.name.common}</h2>
                     </div>
                   </td>
                   <td>
-                    <div className="font-bold ">{e.region}</div>
+                    <div className="font-bold text-xs ">{e.region}</div>
                   </td>
                 </tr>
               ))}
