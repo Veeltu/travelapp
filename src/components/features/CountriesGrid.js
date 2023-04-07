@@ -4,7 +4,6 @@ import CountriesTable from "./CountreisTable";
 import FilterByName from "./filters/FilterByName";
 import FilterByContinent from "./filters/FilterByContinent";
 import CountriesDetails from "./CountriesDetails";
-// import InfiniteScroll from "react-infinite-scroll-component";
 import MapChart from "./Map";
 
 import "react-tooltip/dist/react-tooltip.css";
@@ -103,8 +102,8 @@ const handleClickOnMap = (nameCountry) => {
             setFilterResult={setFilterResult}
           />
         </div>
-        <div className=" grid grid-cols-12 w-full max-w-7xl">
-          <div className="col-span-8 px-10" >
+        <div className=" flex flex-col justify-center md:flex-row w-full gap-10 max-w-7xl">
+          <div className="w-full md:w-3/5 " >
 
           <MapChart
             setTooltipCountry={setTooltipCountry}
@@ -117,7 +116,7 @@ const handleClickOnMap = (nameCountry) => {
           {detailPageViewShow ? (
               <>
               <div
-                className="col-span-4"
+                className="md:max-w-sm"
                 ref={myRef}
                 // onClick={handleClickOutside}
               >
@@ -135,7 +134,7 @@ const handleClickOnMap = (nameCountry) => {
             </>
           ) : (
             <>
-            <div className="cursor-pointer col-span-4">
+            <div className="cursor-pointer md:max-w-sm ">
               <CountriesTable
                 data={filterResult}
                 // set data for detailPage and open detailPage

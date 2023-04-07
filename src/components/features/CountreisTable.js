@@ -13,7 +13,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
   };
 
   const handleScroll = (e) => {
-    if (e.target.scrollTop >= 2000) {
+    if (e.target.scrollTop >= 20) {
       setShowButton(true);
     } else {
       setShowButton(false);
