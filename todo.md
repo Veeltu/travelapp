@@ -1,5 +1,5 @@
-work in progres
 
+-------------done----------------
 + axios coutries api
 + setup daisyUI
 + table
@@ -23,7 +23,6 @@ work in progres
 + limit height of table
 
 -------------TODOs----------------
-
 - NEXT add filters to table
 - smaller detail page fonts, flag buttons etc
 - table too wide
@@ -43,5 +42,4 @@ work in progres
 - add some money stuff ?
 
 -------------bugs----------------
-    
 - fill dont work on usa and congo / why ?
