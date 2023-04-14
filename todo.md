@@ -21,17 +21,18 @@
 + integration with daisyUI
 + map size and coordinates hover changes
 + limit height of table
++ add basic responsive
+- export some functionality
+- clean up states
+- smaller detail page fonts, flag buttons etc
+- table button to top fix
+- add filters to table
 
 -------------TODOs----------------
-- NEXT add filters to table
-- smaller detail page fonts, flag buttons etc
-- table too wide
-- add basic responsive
-- clean up states
-- export some functionality
+- 
 
 -------------optional----------------
-- how to hide apikey ? for unsplash with limit 50 on 1h dont need it /
+- how to hide apikey ? for unsplash with limit 50 on 1h dont need it / .env 
 - zoom on continent when filter ?
 - alternative api from json when fetch fail ?
 - zoom on hover ?
@@ -43,3 +44,4 @@
 
 -------------bugs----------------
 - fill dont work on usa and congo / why ?
+- antarctica bug
