@@ -44,16 +44,18 @@ function CountriesGrid() {
   }, []);
 
   const filterName = (nameCountry) => {
-  const countryData = jsonData.filter((e) => e.name.common === nameCountry);
-  setDataForDetailPage(countryData);
-  if (detailPageViewShow === false) {setDetailPageViewShow(true)}
-  }
+    const countryData = jsonData.filter((e) => e.name.common === nameCountry);
+    setDataForDetailPage(countryData);
+    if (detailPageViewShow === false) {
+      setDetailPageViewShow(true);
+    }
+  };
 
-const handleClickOnMap = (nameCountry) => {
-  const country = checkDifrences(nameCountry)
-  filterName(country)
-}
-  
+  const handleClickOnMap = (nameCountry) => {
+    const country = checkDifrences(nameCountry);
+    filterName(country);
+  };
+
   const changeCountry = (e) => {
     const target = e.currentTarget.textContent;
     const detailData = jsonData.filter((e) => e.name.common === target);
@@ -62,9 +64,9 @@ const handleClickOnMap = (nameCountry) => {
   };
 
   const resetDetailState = () => {
-    setDataForDetailPage([])
-    setDetailPageViewShow(false)
-  }
+    setDataForDetailPage([]);
+    setDetailPageViewShow(false);
+  };
 
   //close details => outside click and ESC
   const myRef = useRef();
@@ -93,28 +95,27 @@ const handleClickOnMap = (nameCountry) => {
     <>
       <div className="body flex flex-col justify-center align-middle max-w-7xl ">
         <div className="flex flex-col items-center justify-between w-full px-4 py-6 mx-auto h-9 sm:flex-row max-w-7xl">
-          <FilterByName
+          {/* <FilterByName
             jsonData={jsonData}
             setFilterResults={setFilterResult}
           />
           <FilterByContinent
             jsonData={jsonData}
             setFilterResult={setFilterResult}
-          />
+          /> */}
         </div>
         <div className=" flex flex-col justify-center md:flex-row w-full gap-10 max-w-7xl">
-          <div className="w-full md:w-3/5 " >
-
-          <MapChart
-            setTooltipCountry={setTooltipCountry}
-            dataForDetailPage={dataForDetailPage}
-            handleClickOnMap={handleClickOnMap}
-            hoverData={hoverData}
-            hoverBorderData={hoverBorderData}
+          <div className="w-full md:w-3/5 ">
+            <MapChart
+              setTooltipCountry={setTooltipCountry}
+              dataForDetailPage={dataForDetailPage}
+              handleClickOnMap={handleClickOnMap}
+              hoverData={hoverData}
+              hoverBorderData={hoverBorderData}
             />
-            </div>
+          </div>
           {detailPageViewShow ? (
-              <>
+            <>
               <div
                 className="md:max-w-sm"
                 ref={myRef}
@@ -134,15 +135,23 @@ const handleClickOnMap = (nameCountry) => {
             </>
           ) : (
             <>
-            <div className="cursor-pointer md:max-w-sm ">
-              <CountriesTable
-                data={filterResult}
-                // set data for detailPage and open detailPage
-                setNameFilter={filterName}
-                setHoverData={setHoverData}
-              />
-            </div>
-          </>
+              <div className="cursor-pointer md:max-w-sm ">
+                <FilterByContinent
+                  jsonData={jsonData}
+                  setFilterResult={setFilterResult}
+                />
+                <FilterByName
+                  jsonData={jsonData}
+                  setFilterResults={setFilterResult}
+                />
+                <CountriesTable
+                  data={filterResult}
+                  // set data for detailPage and open detailPage
+                  setNameFilter={filterName}
+                  setHoverData={setHoverData}
+                />
+              </div>
+            </>
           )}
           <Tooltip id="tooltip">{tooltipCountry}</Tooltip>
         </div>
