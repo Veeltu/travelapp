@@ -1,11 +1,11 @@
-import CountriesGrid from "../features/CountriesGrid";
-import UpperTab from "../features/UpperTab";
+import BodyView from "../Body/BodyView";
+import UpperTab from "../UpperTab";
 
 function MainView() {
   return (
     <div className="px-10 flex flex-col justify-center items-center">
         <UpperTab />
-        <CountriesGrid />
+        <BodyView />
     </div>
   );
 }

@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/src/components/features/CountriesGrid/CountriesGrid.js"
+            "program": "${workspaceFolder}/src/components/features/BodyView/BodyView.js"
         }
     ]
 }

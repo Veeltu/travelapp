@@ -1,4 +1,4 @@
-import UpperTab from "./UpperTab";
+import UpperTab from "../../UpperTab";
 import { Link } from "react-router-dom";
 import { createApi, Unsplash } from "unsplash-js";
 import axios from "axios";

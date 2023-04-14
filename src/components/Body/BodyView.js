@@ -1,18 +1,17 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import CountriesTable from "./CountreisTable";
-import FilterByName from "./filters/FilterByName";
-import FilterByContinent from "./filters/FilterByContinent";
-import CountriesDetails from "./CountriesDetails";
-import MapChart from "./Map";
-
+import CountriesTable from "./table/CountreisTable";
+import FilterByName from "../filters/FilterByName";
+import FilterByContinent from "../filters/FilterByContinent";
+import CountriesDetails from "./detailsPage/CountriesDetails";
+import MapChart from "./map/Map";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
-import { checkDifrences } from "./checkDifrences";
+import { checkDifrences } from "../utils/checkDifrences";
 
 const url = "https://restcountries.com/v3.1/";
 
-function CountriesGrid() {
+function BodyView() {
   const [jsonData, setJsonData] = useState([]);
   const [filterResult, setFilterResult] = useState([]);
   // name of coutry use to filter from big data
@@ -94,16 +93,7 @@ function CountriesGrid() {
   return (
     <>
       <div className="body flex flex-col justify-center align-middle max-w-7xl ">
-        <div className="flex flex-col items-center justify-between w-full px-4 py-6 mx-auto h-9 sm:flex-row max-w-7xl">
-          {/* <FilterByName
-            jsonData={jsonData}
-            setFilterResults={setFilterResult}
-          />
-          <FilterByContinent
-            jsonData={jsonData}
-            setFilterResult={setFilterResult}
-          /> */}
-        </div>
+
         <div className=" flex flex-col justify-center md:flex-row w-full gap-10 max-w-7xl">
           <div className="w-full md:w-3/5 ">
             <MapChart
@@ -127,8 +117,6 @@ function CountriesGrid() {
                   jsonData={jsonData}
                   backButton={resetDetailState}
                   changeCountry={changeCountry}
-                  //for img page
-                  // nameFilter={nameFilter}
                   setHoverBorderData={setHoverBorderData}
                 />
               </div>
@@ -160,4 +148,4 @@ function CountriesGrid() {
   );
 }
 
-export default CountriesGrid;
+export default BodyView;

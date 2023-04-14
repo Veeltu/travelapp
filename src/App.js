@@ -1,5 +1,5 @@
 import MainView from "./components/Views/MainView";
-import Images from "./components/features/Images";
+import Images from "./components/Body/imgPage/Images";
 import { Route, Routes } from "react-router-dom";
 
 
