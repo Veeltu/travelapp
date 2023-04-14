@@ -28,7 +28,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
   };
 
   return (
-    <>
+    <div className="relative ">
       <InfiniteScroll dataLength={data.length}>
         <div
           style={{ height: "500px", overflow: "auto" }}
@@ -59,7 +59,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
                     </div>
                   </td>
                   <td className="">
-                    <div className="font-bold w-10  md:w-24 text-xs ">
+                    <div className="font-bold w-10 md:w-60  text-xs">
                       <h2>{e.name.common}</h2>
                     </div>
                   </td>
@@ -74,7 +74,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
       </InfiniteScroll>
       {showButton && (
         <button
-          className="fixed text-2xl text-gray-700 hover:text-gray-900 z-20"
+          className="fixed text-2xl text-primary hover:text-secondary z-20  "
           onClick={handleBackToTopClick}
         >
           <svg
@@ -83,7 +83,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-20 h-20"
           >
             <path
               strokeLinecap="round"
@@ -93,7 +93,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
           </svg>
         </button>
       )}
-    </>
+    </div>
   );
 };
 

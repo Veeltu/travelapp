@@ -24,11 +24,10 @@ function MapChart({
 
   // state for zoom to target(detailPage) country
   const [targetCoordinates, setTargetCoordinates] = useState([]);
-  // why I need cca3 ?
-  const [cca3Name, setCca3Name] = useState("");
+  // const [cca3Name, setCca3Name] = useState("");
   //hover states
   const [hoverTableName, setHoverTableName] = useState("");
-  const [hoverCoordinates, setHoverCoordinates] = useState([]);
+  // const [hoverCoordinates, setHoverCoordinates] = useState([]);
 
   // hover logic
   useEffect(() => {

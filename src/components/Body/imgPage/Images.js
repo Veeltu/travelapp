@@ -32,8 +32,10 @@ function Images() {
   }, [pageNumber]);
 
   return (
-    <div className="gap-10  flex flex-col justify-center px-20">
+    <>
+   
       <UpperTab />
+    <div className="gap-10  flex flex-col justify-center px-20">
       <Link to="/">
         <button className="btn">back</button>
       </Link>
@@ -64,6 +66,7 @@ function Images() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
