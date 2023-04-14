@@ -23,7 +23,7 @@ function FilterByContinent({ jsonData, setFilterResult }) {
   }, [filterByContinent]);
 
   return (
-    <div>
+    <div className="flex justify-center">
       <select
         onChange={(e) =>  setFilterByContinent(e.target.value)}
         className="w-full max-w-xs select"

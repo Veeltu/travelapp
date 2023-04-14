@@ -92,7 +92,7 @@ function BodyView() {
 
   return (
     <>
-      <div className="body flex flex-col justify-center align-middle max-w-7xl ">
+      <div className="body p-10 flex flex-col justify-center align-middle max-w-7xl ">
 
         <div className=" flex flex-col justify-center md:flex-row w-full gap-10 max-w-7xl">
           <div className="w-full md:w-3/5 ">
@@ -123,7 +123,7 @@ function BodyView() {
             </>
           ) : (
             <>
-              <div className="cursor-pointer md:max-w-sm ">
+              <div className=" flex flex-col gap-2 justify-center cursor-pointer">
                 <FilterByContinent
                   jsonData={jsonData}
                   setFilterResult={setFilterResult}

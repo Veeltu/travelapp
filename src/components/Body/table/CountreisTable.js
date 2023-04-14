@@ -35,7 +35,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
           onScroll={handleScroll}
           ref={(node) => (tableRef.current = node)}
         >
-          <table className="table text-xs">
+          <table className="table w-full overflow-x-auto text-xs">
             <thead className="sticky top-0 z-10">
               <tr>
                 <th>flag</th>
@@ -46,7 +46,7 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
             <tbody>
               {data.map((e) => (
                 <tr
-                  className="hover"
+                  className="hover "
                   onClick={(e) => handleTableClick(e)}
                   onMouseEnter={() => setHoverData(e)}
                   onMouseLeave={() => setHoverData("")}
@@ -58,13 +58,13 @@ const CountriesTable = ({ data, setNameFilter, setHoverData }) => {
                       <img className="" alt="flag" src={e.flags.png}></img>
                     </div>
                   </td>
-                  <td>
-                    <div className="font-bold text-xs overflow-hidden">
+                  <td className="">
+                    <div className="font-bold w-10  md:w-24 text-xs ">
                       <h2>{e.name.common}</h2>
                     </div>
                   </td>
                   <td>
-                    <div className="font-bold text-xs ">{e.region}</div>
+                    <div className="font-bold text-xs">{e.region}</div>
                   </td>
                 </tr>
               ))}

@@ -13,7 +13,7 @@ function FilterByName({jsonData, setFilterResults }) {
 
   return (
     <div>
-      <div className="relative block ">
+      <div className="flex justify-center">
         <input
           value={inputTextToFilter}
           className="w-full max-w-xs input"

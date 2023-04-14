@@ -2,13 +2,12 @@ import { useEffect } from "react";
 import { themeChange } from "theme-change";
 
 function UpperTab() {
-
   useEffect(() => {
-    themeChange(false)
-  },[])
+    themeChange(false);
+  }, []);
 
   return (
-    <div className="navbar mb-10 drop-shadow-xl bg-base-300 " >
+    <div className="navbar mb-10 drop-shadow-md bg-base-100 ">
       <div className="justify-between w-full px-4 py-6 mx-auto max-w-7xl">
         <h1 className="text-xl font-bold md:text-xl dark:text-White ">
           travelApp
@@ -23,8 +22,6 @@ function UpperTab() {
             <option value="coffee">dark coffee</option>
             <option value="cyberpunk">cyberpunk</option>
             <option value="aqua">aqua</option>
-          
-
           </select>
         </div>
       </div>
