@@ -14,7 +14,7 @@ function UpperTab() {
         </h1>
         <div>
           <select data-choose-theme className="w-full max-w-xs select">
-            <option value="">light</option>
+            <option value="light">light</option>
             <option value="dark">dark</option>
             <option value="garden">light garden</option>
             <option value="coffee">dark coffee</option>

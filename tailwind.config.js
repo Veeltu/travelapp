@@ -4,7 +4,7 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   daisyui: {
     styled: true,
-    themes: true,
+    themes: ["light" , "dark", "garden", "coffee", "cyberpunk", "aqua"],
     base: true,
     utils: true,
     logs: true,

@@ -1,12 +1,11 @@
 import UpperTab from "../../UpperTab";
 import { Link } from "react-router-dom";
-import { createApi, Unsplash } from "unsplash-js";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 
-function Images() {
+function ImagesView() {
   const [unsplashData, setUnsplashData] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -14,7 +13,7 @@ function Images() {
   const data = locationData.state; // const for search unsplash
   const name = data.map((el) => el.name.common);
 
-  const accessKey = "lf8U9V07h_SeLEJ0OeuNA2o3NyWKjUZ0UjWL2jWJ26c";
+  const accessKey = process.env.REACT_APP_UNSPLASH_API_KEY;
 
   useEffect(() => {
     const getData = async () => {
@@ -70,4 +69,4 @@ function Images() {
   );
 }
 
-export default Images;
+export default ImagesView;

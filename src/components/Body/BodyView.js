@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import CountriesTable from "./table/CountreisTable";
+import CountriesTable from "./table/CountriesTable";
 import FilterByName from "../filters/FilterByName";
 import FilterByContinent from "../filters/FilterByContinent";
 import CountriesDetails from "./detailsPage/CountriesDetails";
@@ -9,7 +9,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { checkDifrences } from "../utils/checkDifrences";
 
-const url = "https://restcountries.com/v3.1/";
+const url = "https://restcountries.com/v3.1/"; // do configow
 
 function BodyView() {
   const [jsonData, setJsonData] = useState([]);

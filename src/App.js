@@ -1,15 +1,13 @@
 import MainView from "./components/Views/MainView";
-import Images from "./components/Body/imgPage/Images";
+import ImagesView from "./components/Body/imgPage/ImagesView";
 import { Route, Routes } from "react-router-dom";
-
-
 
 function App() {
   return (
     <>
     <Routes>
     <Route path="/" element ={<MainView />} />
-    <Route path="/images" element={<Images />}/>
+    <Route path="/ImagesView" element={<ImagesView />}/>
     </Routes>
     </>
   );

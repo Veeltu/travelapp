@@ -79,9 +79,9 @@ function CountriesDetails({
                   </div>
                 </div>
                 <div className=" sm:col-span-2 sm:mt-2">
-                  <Link to="/images" state={data}>
+                  <Link to="/ImagesView" state={data}>
                     <button className="btn btn-wide btn-large btn-secondary my-5">
-                      images
+                      ImagesView
                     </button>
                   </Link>
                   <div>
@@ -109,8 +109,8 @@ function CountriesDetails({
             </div>
           ))}
         </div>
-        {/* <Link to="/images" state={nameFilter}>
-          <button className="btn btn-wide btn-large btn-secondary">images</button>
+        {/* <Link to="/ImagesView" state={nameFilter}>
+          <button className="btn btn-wide btn-large btn-secondary">ImagesView</button>
         </Link> */}
       </main>
     </div>
