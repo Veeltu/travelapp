@@ -12,7 +12,7 @@ import axios from "axios";
 import { useSpring, animated } from "react-spring";
 
 const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"; // wyciągnąc do config
 
 function MapChart({
   dataForDetailPage,
